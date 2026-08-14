@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+*.log
+*.png
+*.jpg
+logs.json
+last_check.json
+daily_deliveries.json
+render_cache.json
+debug_*.png
+.DS_Store
