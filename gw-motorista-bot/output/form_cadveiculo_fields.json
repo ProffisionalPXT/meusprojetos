@@ -1,0 +1,422 @@
+[
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "voltar",
+    "id": "voltar",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Cadastro de Veículo"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoria",
+    "id": "categoria",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Categoria: Veículo Terrestre Veículo Aquático"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "pl",
+    "id": "pl",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Placa: Frota Nº:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "numeroFrota",
+    "id": "numeroFrota",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Placa: Frota Nº:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ren",
+    "id": "ren",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Renavan: Modelo: Ano Mod/Fab: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "mod",
+    "id": "mod",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Renavan: Modelo: Ano Mod/Fab: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "anomodelo",
+    "id": "anomodelo",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Renavan: Modelo: Ano Mod/Fab: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ano",
+    "id": "ano",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Renavan: Modelo: Ano Mod/Fab: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "chs",
+    "id": "chs",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Chassi: *Marca:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "marca",
+    "id": "marca",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Chassi: *Marca:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_marca",
+    "id": "localiza_marca",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Chassi: *Marca:"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoProp",
+    "id": "tipoProp",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Proprietário Arrendatário *Tipo: CARRETA CAVALO TRUCK"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nome_prop",
+    "id": "nome_prop",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Proprietário Arrendatário *Tipo: CARRETA CAVALO TRUCK"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_proprietario",
+    "id": "localiza_proprietario",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Proprietário Arrendatário *Tipo: CARRETA CAVALO TRUCK"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tip",
+    "id": "tip",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Proprietário Arrendatário *Tipo: CARRETA CAVALO TRUCK"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "alienado",
+    "id": "alienado",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Alienado à:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_proprietario2",
+    "id": "localiza_proprietario2",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Alienado à:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cidade_proprietario",
+    "id": "cidade_proprietario",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Cidade: Cor: Não Informado BRANCA AMARELA AZUL VERDE VERMELHA LARANJA PRETA PRATA CINZA BEGE ROXO V"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "uf_proprietario",
+    "id": "uf_proprietario",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Cidade: Cor: Não Informado BRANCA AMARELA AZUL VERDE VERMELHA LARANJA PRETA PRATA CINZA BEGE ROXO V"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_cidade",
+    "id": "localiza_cidade",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Cidade: Cor: Não Informado BRANCA AMARELA AZUL VERDE VERMELHA LARANJA PRETA PRATA CINZA BEGE ROXO V"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "cor",
+    "id": "cor",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "*Cidade: Cor: Não Informado BRANCA AMARELA AZUL VERDE VERMELHA LARANJA PRETA PRATA CINZA BEGE ROXO V"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipofrota",
+    "id": "tipofrota",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Tipo de frota: Agregada Frota Própria Carreteiro"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "capacidadeCarga",
+    "id": "capacidadeCarga",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Cap. carga: Kg Tara: Kg"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "taraVeiculo",
+    "id": "taraVeiculo",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Cap. carga: Kg Tara: Kg"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "qtdPallets",
+    "id": "qtdPallets",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Qtd. Pallets: Qtd. Cestos: Cubagem: m³"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "qtdCestos",
+    "id": "qtdCestos",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Qtd. Pallets: Qtd. Cestos: Cubagem: m³"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cubagemVeiculo",
+    "id": "cubagemVeiculo",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Qtd. Pallets: Qtd. Cestos: Cubagem: m³"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "numero_rastreador",
+    "id": "numero_rastreador",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Rastreador: Marca:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "marca_rastreador",
+    "id": "marca_rastreador",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Rastreador: Marca:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_marca2",
+    "id": "localiza_marca2",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Rastreador: Marca:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "checkbox",
+    "name": "isBloqueado",
+    "id": "isBloqueado",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Bloquear o Veículo"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "altura_carroceria",
+    "id": "altura_carroceria",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Altura Mt Largura Mt Compr. Mt"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "largura_carroceria",
+    "id": "largura_carroceria",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Altura Mt Largura Mt Compr. Mt"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "comprimento_carroceria",
+    "id": "comprimento_carroceria",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Altura Mt Largura Mt Compr. Mt"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoriaPamcard",
+    "id": "categoriaPamcard",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Tipo de eixos Pamcard/e-Frete: Selecione AUTOMOVEL, CAMINHONETE, CAMIONETA, FURGAO ( 2 EIXOS - ROD. "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "solucaoPedagio",
+    "id": "solucaoPedagio",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Tipo de eixos Pamcard/e-Frete: Selecione AUTOMOVEL, CAMINHONETE, CAMIONETA, FURGAO ( 2 EIXOS - ROD. "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoriaNdd",
+    "id": "categoriaNdd",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Tipo de eixos NDD/Target: Selecione Isento (não calcula pedágio) Motocicletas, motonetas e bicicleta"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoriaPagbem",
+    "id": "categoriaPagbem",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": "Tipo de eixos Pagbem: Selecione Simples Duplo"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "con_rzs",
+    "id": "con_rzs",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Alocado no cliente:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "sigla_und",
+    "id": "sigla_und",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Unidade de custo para lançamento de despesas e receitas:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "descricao_und",
+    "id": "descricao_und",
+    "vis": true,
+    "ro": true,
+    "dis": false,
+    "label": "Unidade de custo para lançamento de despesas e receitas:"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "salvar",
+    "id": "salvar",
+    "vis": true,
+    "ro": false,
+    "dis": false,
+    "label": ""
+  }
+]

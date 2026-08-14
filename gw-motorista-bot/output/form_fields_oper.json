@@ -1,0 +1,162 @@
+[
+  {
+    "tag": "IMG",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "ns.saas.gwsistemas.com.br/img/banner.gif",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "Button",
+    "id": "",
+    "src": "",
+    "onclick": "javascript:voltar();",
+    "vis": true,
+    "label": "Cadastro de Motoristas "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoria",
+    "id": "categoria",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Código(id): Categoria: Motorista (Transporte Rodoviário) Tripulante (Transport"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cpf",
+    "id": "cpf",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "*CPF: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nome",
+    "id": "nome",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Nome: Apelido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "apelido",
+    "id": "apelido",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Nome: Apelido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ddd",
+    "id": "ddd",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "telefone",
+    "id": "telefone",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ddd2",
+    "id": "ddd2",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "telefone2",
+    "id": "telefone2",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELE"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "operadoraCelular",
+    "id": "operadoraCelular",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELE"
+  },
+  {
+    "tag": "A",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  },
+  {
+    "tag": "A",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  },
+  {
+    "tag": "A",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  },
+  {
+    "tag": "A",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  },
+  {
+    "tag": "A",
+    "type": "",
+    "name": "",
+    "id": "",
+    "src": "",
+    "onclick": "",
+    "vis": true,
+    "label": ""
+  }
+]

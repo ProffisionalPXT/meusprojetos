@@ -1,0 +1,113 @@
+{
+  "caso_nome": "motorista",
+  "rntrc_tac": "057962566",
+  "motorista": {
+    "categoria": "Motorista (Transporte)",
+    "cpf": "86829262100",
+    "nome": "FLARES AZEVEDO SANTOS",
+    "apelido": "",
+    "telefone_fixo": "",
+    "telefone_celular": "",
+    "data_nascimento": "25/04/1980",
+    "sexo": "MASCULINO",
+    "cep": "74003010",
+    "endereco": "AVENIDA GOIAS",
+    "bairro": "CENTRO",
+    "complemento": "",
+    "cidade": "GOIANIA",
+    "uf": "GO",
+    "naturalidade": "GOIANIA",
+    "nacionalidade": "BRASILEIRO",
+    "estado_civil": "",
+    "nome_pai": "JOSE BRAGA DOS SANTOS",
+    "nome_mae": "MARIA IZOLDA ALVES DE AZEVEDO SANTOS",
+    "rg": "4070781",
+    "orgao_emissor": "DGPC GO",
+    "cnh": "03655451663",
+    "validade_cnh": "05/12/2034",
+    "data_emissao_cnh": "06/12/2024",
+    "local_emissao_cnh": "GOIANIA/GO",
+    "categoria_cnh": "AE",
+    "data_primeira_habilitacao": "08/08/2005",
+    "tipo_motorista": "CARRETEIRO",
+    "placa_veiculo": "ECM6A71",
+    "placa_carreta": "NFH3145",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CNH-e.pdf (2).pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_000037873607NFH3145.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_1307500445549DW2588.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\WhatsApp Image 2026-08-14 at 08.25.25.jpeg"
+    ]
+  },
+  "veiculo": {
+    "categoria": "Veículo Terrestre",
+    "placa": "ECM6A71",
+    "renavam": "00528066269",
+    "chassi": "9536Y827XDR323187",
+    "marca_modelo_versao": "VW 19.330 CTC 4X2",
+    "modelo": "VW 19.330 CTC 4X2",
+    "marca": "VW 19.330 CTC 4X2",
+    "ano_mod": "2013",
+    "ano_fab": "2013",
+    "cor": "BRANCA",
+    "tipo": "CAVALO",
+    "tipo_frota": "CARRETEIRO",
+    "cidade": "NEROPOLIS",
+    "uf": "GO",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "VALDIJAN ARANTES DA SILVA",
+    "proprietario": "DadosProprietario(nome='VALDIJAN ARANTES DA SILVA', cpf_cnpj='64471802291', tipo_doc='CPF', rg='0000000', inscricao_estadual='', cidade='NEROPOLIS', uf='GO', rntrc='057962566', fotos=['C:\\\\Users\\\\TRANSRAP05\\\\Desktop\\\\gw-motorista-bot\\\\input\\\\motorista\\\\WhatsApp Image 2026-08-14 at 08.25.25.jpeg'])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_1307500445549DW2588.pdf.pdf"
+    ]
+  },
+  "carreta": {
+    "categoria": "Veículo Terrestre",
+    "placa": "NFH3145",
+    "renavam": "00828500975",
+    "chassi": "9AA08153G4C049220",
+    "marca_modelo_versao": "SR GUERRA AG FG",
+    "modelo": "SR GUERRA AG FG",
+    "marca": "SR GUERRA AG FG",
+    "ano_mod": "2004",
+    "ano_fab": "2004",
+    "cor": "PRATA",
+    "tipo": "CARRETA",
+    "tipo_frota": "CARRETEIRO",
+    "cidade": "KKK NEROPOLIS",
+    "uf": "GO",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "VALDIJAN ARANTES DA SILVA",
+    "proprietario": "DadosProprietario(nome='VALDIJAN ARANTES DA SILVA', cpf_cnpj='64471802291', tipo_doc='CPF', rg='0000000', inscricao_estadual='', cidade='KKK NEROPOLIS', uf='GO', rntrc='057962566', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_000037873607NFH3145.pdf.pdf"
+    ]
+  },
+  "bitrem": null,
+  "tri_reboque": null,
+  "proprietario": {
+    "nome": "VALDIJAN ARANTES DA SILVA",
+    "cpf_cnpj": "64471802291",
+    "tipo_doc": "CPF",
+    "rg": "0000000",
+    "inscricao_estadual": "",
+    "cidade": "NEROPOLIS",
+    "uf": "GO",
+    "rntrc": "057962566",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\WhatsApp Image 2026-08-14 at 08.25.25.jpeg"
+    ]
+  },
+  "arquivos": [
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CNH-e.pdf (2).pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_000037873607NFH3145.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\CRLV-e_1307500445549DW2588.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\WhatsApp Image 2026-08-14 at 08.25.25.jpeg"
+  ],
+  "avisos_ocr": [
+    "[cnh/CNH-e.pdf (2).pdf] categoria AB detectada (pode ser AE) - confirmando com IA",
+    "[cnh/CNH-e.pdf (2).pdf] categoria_cnh: OCR local duvidoso (AB) -> ajustado com 2ª leitura (AE)"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "caso_nome": "cadastro",
+  "rntrc_tac": "",
+  "motorista": {
+    "categoria": "Motorista (Transporte)",
+    "cpf": "88989925487",
+    "nome": "BARTOLOMEU GOMES DE LIRA FILHO",
+    "apelido": "",
+    "telefone_fixo": "",
+    "telefone_celular": "",
+    "data_nascimento": "09/05/1974",
+    "sexo": "Masculino",
+    "cep": "50010000",
+    "endereco": "RUA DA AURORA",
+    "bairro": "BOA VISTA",
+    "complemento": "",
+    "cidade": "RECIFE",
+    "uf": "PE",
+    "naturalidade": "RECIFE",
+    "nacionalidade": "BRASILEIRO",
+    "estado_civil": "",
+    "nome_pai": "BARTOLOMEU GOMES DE LIRA",
+    "nome_mae": "RAIMUNDA MARIA DE LIRA",
+    "rg": "3661263",
+    "orgao_emissor": "SSP PE",
+    "cnh": "01973178044",
+    "validade_cnh": "26/03/2030",
+    "data_emissao_cnh": "27/03/2025",
+    "local_emissao_cnh": "",
+    "categoria_cnh": "AE",
+    "data_primeira_habilitacao": "10/09/1996",
+    "tipo_motorista": "Carreteiro",
+    "placa_veiculo": "NII5F46",
+    "placa_carreta": "ECM3H90",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\CNH-e.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\CRLV-e_102360951363A014032.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\TRANSP NASCIMENTO CRLVDigital_NII5F46_2026.pdf"
+    ]
+  },
+  "veiculo": {
+    "categoria": "Veículo Terrestre",
+    "placa": "NII5F46",
+    "renavam": "00154716090",
+    "chassi": "9BWYJ82789R934768",
+    "marca_modelo_versao": "VW 25.320 CLC T 6X2",
+    "modelo": "VW 25.320 CLC T 6X2",
+    "marca": "VW 25.320 CLC T 6X2",
+    "ano_mod": "2009",
+    "ano_fab": "2009",
+    "cor": "BRANCA",
+    "tipo": "CAVALO",
+    "tipo_frota": "Carreteiro",
+    "cidade": "RECIFE",
+    "uf": "PE",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "NASCIMENTO E SANTOS TRANSPORTES LTDA",
+    "proprietario": "DadosProprietario(nome='NASCIMENTO E SANTOS TRANSPORTES LTDA', cpf_cnpj='18937262000142', tipo_doc='CNPJ', rg='', inscricao_estadual='0000000', cidade='RECIFE', uf='PE', rntrc='', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\TRANSP NASCIMENTO CRLVDigital_NII5F46_2026.pdf"
+    ]
+  },
+  "carreta": {
+    "categoria": "Veículo Terrestre",
+    "placa": "ECM3H90",
+    "renavam": "00208882499",
+    "chassi": "9AA08153GAC091989",
+    "marca_modelo_versao": "SR GUERRA AG SI",
+    "modelo": "SR GUERRA AG SI",
+    "marca": "SR GUERRA AG SI",
+    "ano_mod": "2010",
+    "ano_fab": "2010",
+    "cor": "BRANCA",
+    "tipo": "CARRETA",
+    "tipo_frota": "Carreteiro",
+    "cidade": "RECIFE",
+    "uf": "PE",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "LENILSON SANTOS DO NASCIMENTO",
+    "proprietario": "DadosProprietario(nome='LENILSON SANTOS DO NASCIMENTO', cpf_cnpj='66099340459', tipo_doc='CPF', rg='0000000', inscricao_estadual='', cidade='RECIFE', uf='PE', rntrc='', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\CRLV-e_102360951363A014032.pdf.pdf"
+    ]
+  },
+  "proprietario": {
+    "nome": "NASCIMENTO E SANTOS TRANSPORTES LTDA",
+    "cpf_cnpj": "18937262000142",
+    "tipo_doc": "CNPJ",
+    "rg": "",
+    "inscricao_estadual": "0000000",
+    "cidade": "RECIFE",
+    "uf": "PE",
+    "rntrc": "",
+    "fotos": []
+  },
+  "arquivos": [
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\CNH-e.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\CRLV-e_102360951363A014032.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\cadastro\\TRANSP NASCIMENTO CRLVDigital_NII5F46_2026.pdf"
+  ]
+}

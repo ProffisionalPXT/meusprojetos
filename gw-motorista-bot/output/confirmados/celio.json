@@ -1,0 +1,83 @@
+{
+  "caso_nome": "celio",
+  "rntrc_tac": "049285533",
+  "motorista": {
+    "categoria": "Motorista (Transporte)",
+    "cpf": "01963352483",
+    "nome": "CELIO ALBUQUERQUE ROCHA",
+    "apelido": "",
+    "telefone_fixo": "",
+    "telefone_celular": "",
+    "data_nascimento": "17/03/1975",
+    "sexo": "",
+    "cep": "57300005",
+    "endereco": "RUA DO COMERCIO",
+    "bairro": "CENTRO",
+    "complemento": "",
+    "cidade": "ARAPIRACA",
+    "uf": "AL",
+    "naturalidade": "ARAPIRACA",
+    "nacionalidade": "BRASILEIRO",
+    "estado_civil": "",
+    "nome_pai": "MANOEL LOURENCO ROCHA NETO",
+    "nome_mae": "MARIA SUZANA ALBUQUERQUE ROCHA",
+    "rg": "1496900",
+    "orgao_emissor": "SSP AL",
+    "cnh": "09694238661",
+    "validade_cnh": "16/02/2034",
+    "data_emissao_cnh": "19/02/2024",
+    "local_emissao_cnh": "RECIFE/PE",
+    "categoria_cnh": "",
+    "data_primeira_habilitacao": "12/03/1994",
+    "tipo_motorista": "Carreteiro",
+    "placa_veiculo": "KLJ4105",
+    "placa_carreta": "",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\CNH-e.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\CRLV-e_000029529125KLJ4105.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\WhatsApp Image 2026-07-10 at 13.22.01.jpeg"
+    ]
+  },
+  "veiculo": {
+    "categoria": "Veículo Terrestre",
+    "placa": "KLJ4105",
+    "renavam": "00748489495",
+    "chassi": "9BWY2VRK81RY16195",
+    "marca_modelo_versao": "VW 17.210 MOTOR CUMMINS",
+    "modelo": "VW 17.210 MOTOR CUMMINS",
+    "marca": "VW 17.210 MOTOR CUMMINS",
+    "ano_mod": "2001",
+    "ano_fab": "2000",
+    "cor": "BRANCA",
+    "tipo": "TRUCK",
+    "tipo_frota": "Carreteiro",
+    "cidade": "PAULISTA",
+    "uf": "PE",
+    "cap_carga": "12000",
+    "tara": "12000",
+    "proprietario_nome": "CELIO ALBUQUERQUE ROCHA",
+    "proprietario": "DadosProprietario(nome='CELIO ALBUQUERQUE ROCHA', cpf_cnpj='01963352483', tipo_doc='CPF', rg='0000000', inscricao_estadual='', cidade='PAULISTA', uf='PE', rntrc='049285533', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\CRLV-e_000029529125KLJ4105.pdf.pdf"
+    ]
+  },
+  "carreta": null,
+  "proprietario": {
+    "nome": "CELIO ALBUQUERQUE ROCHA",
+    "cpf_cnpj": "01963352483",
+    "tipo_doc": "CPF",
+    "rg": "0000000",
+    "inscricao_estadual": "",
+    "cidade": "PAULISTA",
+    "uf": "PE",
+    "rntrc": "049285533",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\WhatsApp Image 2026-07-10 at 13.22.01.jpeg"
+    ]
+  },
+  "arquivos": [
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\CNH-e.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\CRLV-e_000029529125KLJ4105.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\celio\\WhatsApp Image 2026-07-10 at 13.22.01.jpeg"
+  ]
+}

@@ -1,0 +1,250 @@
+[
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "Button",
+    "id": "",
+    "vis": true,
+    "label": "Cadastro de Motoristas "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoria",
+    "id": "categoria",
+    "vis": true,
+    "label": "Código(id): Categoria: Motorista (Transporte Rodoviário) Tripulante (Transporte Marítimo/Fluvial) "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cpf",
+    "id": "cpf",
+    "vis": true,
+    "label": "*CPF: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nome",
+    "id": "nome",
+    "vis": true,
+    "label": "Nome: Apelido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "apelido",
+    "id": "apelido",
+    "vis": true,
+    "label": "Nome: Apelido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ddd",
+    "id": "ddd",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "telefone",
+    "id": "telefone",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ddd2",
+    "id": "ddd2",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "telefone2",
+    "id": "telefone2",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "operadoraCelular",
+    "id": "operadoraCelular",
+    "vis": true,
+    "label": "Telefone Fixo: Telefone Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "pisPasep",
+    "id": "pisPasep",
+    "vis": true,
+    "label": " PIS/PASEP: Nª Matrícula "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "numeroMatricula",
+    "id": "numeroMatricula",
+    "vis": true,
+    "label": " PIS/PASEP: Nª Matrícula "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "rg",
+    "id": "rg",
+    "vis": true,
+    "label": "RG: Orgão Emissor: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "orgao_rg",
+    "id": "orgao_rg",
+    "vis": true,
+    "label": "RG: Orgão Emissor: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "uf_rg",
+    "id": "uf_rg",
+    "vis": true,
+    "label": "RG: Orgão Emissor: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dataemissaorg",
+    "id": "dataemissaorg",
+    "vis": true,
+    "label": "RG: Orgão Emissor: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "localemissaorg",
+    "id": "localemissaorg",
+    "vis": true,
+    "label": "RG: Orgão Emissor: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cnh",
+    "id": "cnh",
+    "vis": true,
+    "label": "CNH: Prontuário: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "prontuario",
+    "id": "prontuario",
+    "vis": true,
+    "label": "CNH: Prontuário: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dataemissaocnh",
+    "id": "dataemissaocnh",
+    "vis": true,
+    "label": "CNH: Prontuário: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "localemissaocnh",
+    "id": "localemissaocnh",
+    "vis": true,
+    "label": "CNH: Prontuário: Emissão: Local de Emissão: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "vencimentocnh",
+    "id": "vencimentocnh",
+    "vis": true,
+    "label": "Validade: Categoria: A B C D E AB AC AD AE Emissão 1ª CNH: Cód. Segurança CNH: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categcnh",
+    "id": "categcnh",
+    "vis": true,
+    "label": "Validade: Categoria: A B C D E AB AC AD AE Emissão 1ª CNH: Cód. Segurança CNH: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "primeiraHabilitacaoEm",
+    "id": "primeiraHabilitacaoEm",
+    "vis": true,
+    "label": "Validade: Categoria: A B C D E AB AC AD AE Emissão 1ª CNH: Cód. Segurança CNH: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "codSegurancaCNH",
+    "id": "codSegurancaCNH",
+    "vis": true,
+    "label": "Validade: Categoria: A B C D E AB AC AD AE Emissão 1ª CNH: Cód. Segurança CNH: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "codRenach",
+    "id": "codRenach",
+    "vis": true,
+    "label": "Cód. Renach: Nº Título: Zona Eleitoral: Seção Eleitoral: Assinou Termo de responsabilidade/LGP"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "tituloEleitor",
+    "id": "tituloEleitor",
+    "vis": true,
+    "label": "Cód. Renach: Nº Título: Zona Eleitoral: Seção Eleitoral: Assinou Termo de responsabilidade/LGP"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "zonaEleitoral",
+    "id": "zonaEleitoral",
+    "vis": true,
+    "label": "Cód. Renach: Nº Título: Zona Eleitoral: Seção Eleitoral: Assinou Termo de responsabilidade/LGP"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "secaoEleitoral",
+    "id": "secaoEleitoral",
+    "vis": true,
+    "label": "Cód. Renach: Nº Título: Zona Eleitoral: Seção Eleitoral: Assinou Termo de responsabilidade/LGP"
+  },
+  {
+    "tag": "INPUT",
+    "type": "checkbox",
+    "name": "termoResponsabilidadeLGPD",
+    "id": "termoResponsabilidadeLGPD",
+    "vis": true,
+    "label": "Cód. Renach: Nº Título: Zona Eleitoral: Seção Eleitoral: Assinou Termo de responsabilidade/LGP"
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "gravar",
+    "id": "gravar",
+    "vis": true,
+    "label": ""
+  }
+]

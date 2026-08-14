@@ -1,0 +1,120 @@
+{
+  "caso_nome": "motorista",
+  "rntrc_tac": "058902400",
+  "motorista": {
+    "categoria": "Motorista (Transporte)",
+    "cpf": "95024263391",
+    "nome": "DEUSDETE SOLANO DE CARVALHO DIAS",
+    "apelido": "",
+    "telefone_fixo": "",
+    "telefone_celular": "",
+    "data_nascimento": "14/08/1980",
+    "sexo": "MASCULINO",
+    "cep": "01001000",
+    "endereco": "PRACA DA SE",
+    "bairro": "VILA NOVA GALVAO",
+    "complemento": "",
+    "cidade": "SAO PAULO",
+    "uf": "SP",
+    "naturalidade": "SAO JOSE DO PEIXE",
+    "nacionalidade": "BRASILEIRO",
+    "estado_civil": "",
+    "nome_pai": "JOSE DIAS CARNEIRO",
+    "nome_mae": "FRANCISCA SOLANO DE CARVALHO DIAS",
+    "rg": "57512488",
+    "orgao_emissor": "SSP SP",
+    "cnh": "03362589766",
+    "validade_cnh": "20/07/2033",
+    "data_emissao_cnh": "30/05/2025",
+    "local_emissao_cnh": "SAO PAULO/SP",
+    "categoria_cnh": "AE",
+    "data_primeira_habilitacao": "23/08/2004",
+    "tipo_motorista": "CARRETEIRO",
+    "placa_veiculo": "SDZ1J05",
+    "placa_carreta": "FHP4A90",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_cnh_pag1.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_comprovante_pag2.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag3.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag4.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_tac_pag5.pdf"
+    ]
+  },
+  "veiculo": {
+    "categoria": "Veículo Terrestre",
+    "placa": "SDZ1J05",
+    "renavam": "01327004485",
+    "chassi": "9BM958453NB285597",
+    "marca_modelo_versao": "M.BENZ AXOR 2644S6X4",
+    "modelo": "M.BENZ AXOR 2644S6X4",
+    "marca": "M.BENZ AXOR 2644S6X4",
+    "ano_mod": "2022",
+    "ano_fab": "2022",
+    "cor": "PRETA",
+    "tipo": "CAVALO",
+    "tipo_frota": "CARRETEIRO",
+    "cidade": "SAO PAULO",
+    "uf": "SP",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "BALI TRANSPORTES LTDA",
+    "proprietario": "DadosProprietario(nome='BALI TRANSPORTES LTDA', cpf_cnpj='59557687000103', tipo_doc='CNPJ', rg='', inscricao_estadual='0000000', cidade='SAO PAULO', uf='SP', rntrc='058902400', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag3.pdf"
+    ]
+  },
+  "carreta": {
+    "categoria": "Veículo Terrestre",
+    "placa": "FHP4A90",
+    "renavam": "01051370695",
+    "chassi": "94BF1463FFV047731",
+    "marca_modelo_versao": "SR FACCHINI SRF LOED",
+    "modelo": "SR FACCHINI SRF LOED",
+    "marca": "SR FACCHINI SRF LOED",
+    "ano_mod": "2015",
+    "ano_fab": "2015",
+    "cor": "CINZA",
+    "tipo": "CARRETA",
+    "tipo_frota": "CARRETEIRO",
+    "cidade": "SAO PAULO",
+    "uf": "SP",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "BALI TRANSPORTES LTDA",
+    "proprietario": "DadosProprietario(nome='BALI TRANSPORTES LTDA', cpf_cnpj='59557687000103', tipo_doc='CNPJ', rg='', inscricao_estadual='0000000', cidade='SAO PAULO', uf='SP', rntrc='058902400', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag4.pdf"
+    ]
+  },
+  "bitrem": null,
+  "tri_reboque": null,
+  "proprietario": {
+    "nome": "BALI TRANSPORTES LTDA",
+    "cpf_cnpj": "59557687000103",
+    "tipo_doc": "CNPJ",
+    "rg": "",
+    "inscricao_estadual": "0000000",
+    "cidade": "SAO PAULO",
+    "uf": "SP",
+    "rntrc": "058902400",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_tac_pag5.pdf"
+    ]
+  },
+  "arquivos": [
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_cnh_pag1.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_comprovante_pag2.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag3.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_crlv_pag4.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\motorista\\Documentos Deusdete (1)_tac_pag5.pdf"
+  ],
+  "avisos_ocr": [
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] nome vazio - confira no documento",
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] CPF vazio - confira no documento",
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] categoria AB detectada (pode ser AE) - confirmando com IA",
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] categoria_cnh: OCR local duvidoso (AB) -> ajustado com 2ª leitura (AE)",
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] campo 'nome' com baixa confiança - confirme antes do GW",
+    "[cnh/Documentos Deusdete (1)_cnh_pag1.pdf] campo 'cpf' com baixa confiança - confirme antes do GW",
+    "[crlv/Documentos Deusdete (1)_crlv_pag4.pdf] chassi: OCR local duvidoso (264609798832) -> ajustado com 2ª leitura (94BF1463FFV047731)"
+  ]
+}

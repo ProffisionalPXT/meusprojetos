@@ -1,0 +1,1172 @@
+[
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "idcidadeorigem",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "uf_origem",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "codigo_ibge_origem",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "cid_origem",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "ocorrencia_id",
+    "id": "ocorrencia_id",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "ocorrencia",
+    "id": "ocorrencia",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "descricao_ocorrencia",
+    "id": "descricao_ocorrencia",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "obriga_resolucao",
+    "id": "obriga_resolucao",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "id_cidade_naturalidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "uf_naturalidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "cid_naturalidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "chave_pix1",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "chave_pix2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "idUsuarioConsultaRNTRC",
+    "id": "idUsuarioConsultaRNTRC",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "situacaoANTT",
+    "id": "situacaoANTT",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "horaConsultaExpers",
+    "id": "horaConsultaExpers",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "dataConsultaExpers",
+    "id": "dataConsultaExpers",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "cartao_expers",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "cartao_pagbem",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "",
+    "id": "cartao_target",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "localiza_motorista",
+    "id": "localiza_motorista",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cadastro de Proprietário "
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "Button",
+    "id": "",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cadastro de Proprietário "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nom",
+    "id": "nom",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "*Nome: * CPF CNPJ : "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipocgc",
+    "id": "tipocgc",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "*Nome: * CPF CNPJ : "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cpf",
+    "id": "cpf",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "*Nome: * CPF CNPJ : "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "estadoCivil",
+    "id": "estadoCivil",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Estado Civil: Selecione Solteiro Casado Viúvo Divorciado Desquitado Outros Grau de Escolaridade: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "grauEscolaridade",
+    "id": "grauEscolaridade",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Estado Civil: Selecione Solteiro Casado Viúvo Divorciado Desquitado Outros Grau de Escolaridade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cep",
+    "id": "cep",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "CEP: Data de nascimento: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "datanascimentos",
+    "id": "datanascimentos",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "CEP: Data de nascimento: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "en",
+    "id": "en",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Endereço: Bairro: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "logradouro",
+    "id": "logradouro",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Endereço: Bairro: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "bairro",
+    "id": "bairro",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Endereço: Bairro: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cidade",
+    "id": "cidade",
+    "vis": true,
+    "disabled": false,
+    "readonly": true,
+    "label": "Cidade: Contato: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "uf",
+    "id": "uf",
+    "vis": true,
+    "disabled": false,
+    "readonly": true,
+    "label": "Cidade: Contato: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "btn",
+    "id": "btn",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cidade: Contato: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "idCidade",
+    "id": "idCidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cidade: Contato: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "contato",
+    "id": "contato",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cidade: Contato: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoPropriedade",
+    "id": "tipoPropriedade",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Tipo de Propriedade: Não informado Próprio Próprio Financiado Alugado Familiar Cedido Reside desde"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "resideDesde",
+    "id": "resideDesde",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Tipo de Propriedade: Não informado Próprio Próprio Financiado Alugado Familiar Cedido Reside desde"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ddd",
+    "id": "ddd",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Telefone: Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO CTBC OI TELEMI"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "fone",
+    "id": "fone",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Telefone: Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO CTBC OI TELEMI"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dddCelular",
+    "id": "dddCelular",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Telefone: Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO CTBC OI TELEMI"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "celular",
+    "id": "celular",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Telefone: Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO CTBC OI TELEMI"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "operadoraCelular",
+    "id": "operadoraCelular",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Telefone: Celular: NAO_INFORMADO AMAZONIA_CELULAR BRASIL_TELECOM CERCOMTEL CLARO CTBC OI TELEMI"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "email",
+    "id": "email",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Email: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "checkbox",
+    "name": "isOptanteSimplesNacional",
+    "id": "isOptanteSimplesNacional",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": "Email: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "qtddependentes",
+    "id": "qtddependentes",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Dependentes: Apenas para pessoa física "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "rg",
+    "id": "rg",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "R.G.: / Expedição: UF: PIS/PASEP: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "orgaoemissor",
+    "id": "orgaoemissor",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "R.G.: / Expedição: UF: PIS/PASEP: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dataexpedicaorg",
+    "id": "dataexpedicaorg",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "R.G.: / Expedição: UF: PIS/PASEP: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ufrg",
+    "id": "ufrg",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "R.G.: / Expedição: UF: PIS/PASEP: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "pispasep",
+    "id": "pispasep",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "R.G.: / Expedição: UF: PIS/PASEP: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "tituloeleitor",
+    "id": "tituloeleitor",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Titulo de Eleitor: Zona/Seção Eleitoral: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "zonaeleitoral",
+    "id": "zonaeleitoral",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Titulo de Eleitor: Zona/Seção Eleitoral: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "secaoeleitoral",
+    "id": "secaoeleitoral",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Titulo de Eleitor: Zona/Seção Eleitoral: /"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cnh",
+    "id": "cnh",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Número CNH: Emissão: Primeira CNH: Categoria: A B C D E AB AC AD AE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dataemissaocnh",
+    "id": "dataemissaocnh",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Número CNH: Emissão: Primeira CNH: Categoria: A B C D E AB AC AD AE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "primeiracnh",
+    "id": "primeiracnh",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Número CNH: Emissão: Primeira CNH: Categoria: A B C D E AB AC AD AE"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "categoriacnh",
+    "id": "categoriacnh",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Número CNH: Emissão: Primeira CNH: Categoria: A B C D E AB AC AD AE"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nomemae",
+    "id": "nomemae",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Nome da mãe: Nome do pai: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nomepai",
+    "id": "nomepai",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Nome da mãe: Nome do pai: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "sexo",
+    "id": "sexo",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Sexo Não informado Masculino Feminino"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cidNaturalidade",
+    "id": "cidNaturalidade",
+    "vis": true,
+    "disabled": false,
+    "readonly": true,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "ufNaturalidade",
+    "id": "ufNaturalidade",
+    "vis": true,
+    "disabled": false,
+    "readonly": true,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "ibgeNaturalidade",
+    "id": "ibgeNaturalidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "btn_origem",
+    "id": "btn_origem",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "idCidadeNaturalidade",
+    "id": "idCidadeNaturalidade",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nacionalidade",
+    "id": "nacionalidade",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Naturalidade: Nacionalidade: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "percentualDesconto",
+    "id": "percentualDesconto",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "% Desconto conta corrente: Sobre o saldo do frete Sobre o valor do frete Controlar o conta corren"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoDescontoContaCorrente",
+    "id": "tipoDescontoContaCorrente",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "% Desconto conta corrente: Sobre o saldo do frete Sobre o valor do frete Controlar o conta corren"
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoControleContaCorrenteSelect",
+    "id": "tipoControleContaCorrenteSelect",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "% Desconto conta corrente: Sobre o saldo do frete Sobre o valor do frete Controlar o conta corren"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "percentualCTRC",
+    "id": "percentualCTRC",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "% do valor do CTRC (Valor do frete - ICMS - seguro - custo de viagem) aplicado ao gerar um contrato "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "numeroRntrc",
+    "id": "numeroRntrc",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "RNTRC: Validade RNTRC: TAC (Transportador Autônomo de Cargas) "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "dataValidadeRntrc",
+    "id": "dataValidadeRntrc",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "RNTRC: Validade RNTRC: TAC (Transportador Autônomo de Cargas) "
+  },
+  {
+    "tag": "INPUT",
+    "type": "checkbox",
+    "name": "isTac",
+    "id": "isTac",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "RNTRC: Validade RNTRC: TAC (Transportador Autônomo de Cargas) "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaopamcard",
+    "id": "cartaopamcard",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão Pamcard: Cartão NDD: Cartão Repom: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaondd",
+    "id": "cartaondd",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão Pamcard: Cartão NDD: Cartão Repom: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaorepom",
+    "id": "cartaorepom",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão Pamcard: Cartão NDD: Cartão Repom: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaoexpers",
+    "id": "cartaoexpers",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão ExpeRS: Cartão PagBem: Cartão Target: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaopagBemText",
+    "id": "cartaopagBemText",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão ExpeRS: Cartão PagBem: Cartão Target: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "cartaopagBemSelect",
+    "id": "cartaopagBemSelect",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão ExpeRS: Cartão PagBem: Cartão Target: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "cartaoTarget",
+    "id": "cartaoTarget",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Cartão ExpeRS: Cartão PagBem: Cartão Target: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "solucaoPedagio",
+    "id": "solucaoPedagio",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Solução de pedágio: Selecione 1-DBTRANS 2-BRADESCO (VISA VALE-PEDÁGIO) 3-REPOM 4-Sem Parar / Via Fá"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "percentualCombustivelRepom",
+    "id": "percentualCombustivelRepom",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Solução de pedágio: Selecione 1-DBTRANS 2-BRADESCO (VISA VALE-PEDÁGIO) 3-REPOM 4-Sem Parar / Via Fá"
+  },
+  {
+    "tag": "INPUT",
+    "type": "checkbox",
+    "name": "isCooperativa",
+    "id": "isCooperativa",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": "Solução de pedágio: Selecione 1-DBTRANS 2-BRADESCO (VISA VALE-PEDÁGIO) 3-REPOM 4-Sem Parar / Via Fá"
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "maxOcorrencia",
+    "id": "maxOcorrencia",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "hidden",
+    "name": "ocorrenciaExcluir",
+    "id": "ocorrenciaExcluir",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "conta_bancaria",
+    "id": "conta_bancaria",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "agencia_bancaria",
+    "id": "agencia_bancaria",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "banco_id",
+    "id": "banco_id",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "favorecido",
+    "id": "favorecido",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Favorecido: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoContaAdiantamentoExpers",
+    "id": "tipoContaAdiantamentoExpers",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Favorecido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "chavePix",
+    "id": "chavePix",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoChavePix",
+    "id": "tipoChavePix",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "conta_bancaria2",
+    "id": "conta_bancaria2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "agencia_bancaria2",
+    "id": "agencia_bancaria2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "banco_id2",
+    "id": "banco_id2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Conta bancária: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "favorecido2",
+    "id": "favorecido2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Favorecido: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoContaSaldoExpers",
+    "id": "tipoContaSaldoExpers",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Favorecido: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "chavePix2",
+    "id": "chavePix2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "tipoChavePix2",
+    "id": "tipoChavePix2",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respCpf",
+    "id": "respCpf",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " CPF: Pesq"
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respRG",
+    "id": "respRG",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " RG: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respRgOrgao",
+    "id": "respRgOrgao",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " RG: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respRgUf",
+    "id": "respRgUf",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " RG: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respRgEmissao",
+    "id": "respRgEmissao",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " RG: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respNome",
+    "id": "respNome",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Nome: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respDtNasci",
+    "id": "respDtNasci",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Nome: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respEmail",
+    "id": "respEmail",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Email: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "nacionalidade_responsavel",
+    "id": "nacionalidade_responsavel",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Email: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respNomeMae",
+    "id": "respNomeMae",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Nome da Mãe: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "respNomePai",
+    "id": "respNomePai",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Nome da Mãe: "
+  },
+  {
+    "tag": "SELECT",
+    "type": "select-one",
+    "name": "respsexo",
+    "id": "respsexo",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Sexo: "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "id": "dataDeAuditoria",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Data da Ação:⁡ Até "
+  },
+  {
+    "tag": "INPUT",
+    "type": "text",
+    "name": "",
+    "id": "dataAteAuditoria",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Data da Ação:⁡ Até "
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "",
+    "id": "btPesquisarAuditoria",
+    "vis": false,
+    "disabled": false,
+    "readonly": false,
+    "label": " Data da Ação:⁡ Até "
+  },
+  {
+    "tag": "INPUT",
+    "type": "button",
+    "name": "salvar",
+    "id": "salvar",
+    "vis": true,
+    "disabled": false,
+    "readonly": false,
+    "label": ""
+  }
+]

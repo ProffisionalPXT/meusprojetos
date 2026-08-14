@@ -1,0 +1,497 @@
+<!DOCTYPE html><html><head>
+        <meta name="robots" content="noindex">
+        <meta name="googlebot" content="noindex">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>GW Sistemas - Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="vendors/css/bulma.min.css">
+        <link rel="stylesheet" href="resources/css/login.css?v=5">
+        <link href="/assets/css/micromodal.css?v=104" rel="stylesheet">
+        <script type="text/javascript" async="" src="https://static.hotjar.com/c/hotjar-1684992.js?sv=7"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TBZ93HK"></script><script defer="" src="/assets/js/micromodal-0.3.2.min.js?v=104"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
+        <script>
+            var homePath = '';
+            var estagio = 'PROD';
+            const linkApi = `https://api3.gwsistemas.com.br/api-gwsistemas-prod`;
+        </script>
+        <script src="/assets/alerts/alerts-min.js" type="text/javascript"></script>
+        
+<link href="/assets/alerts/css/bootstrap-dialog-min.css?v=327796031" rel="stylesheet" type="text/css">
+<script defer="" src="/assets/alerts/js/bootstrap-dialog-min.js?v=-1910439353" type="text/javascript"></script>
+<script defer="" src="/assets/alerts/js/bootstrap-min.js?v=1452471979" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    caminhoDaImgParaAlert = 'assets/img/gw-trans.png';
+    nomeUsuarioParaAlert = '';
+</script>
+
+<style>
+    
+    .modal-header{
+        border-radius: 10px 10px 0 0;
+        background: url("assets/img/pattern_bg.png");
+    }
+    .modal-body{
+        background: url("assets/img/pattern_bg.png");
+    }
+    .modal-footer{
+        border-radius: 0 0 10px 10px;
+        background: url("assets/img/pattern_bg.png");
+    }
+</style>
+
+<style>
+
+    
+.modal-open {
+  overflow: hidden;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999999;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform .3s ease-out;
+       -o-transition:      -o-transform .3s ease-out;
+          transition:         transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+       -o-transform: translate(0, -25%);
+          transform: translate(0, -25%);
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+       -o-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999999;
+  background-color: #000;
+}
+.modal-backdrop.fade {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+.modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.modal-header .close {
+  margin-top: -2px;
+}
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+.modal-body {
+  position: relative;
+  padding: 15px;
+}
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  }
+  .modal-sm {
+    width: 300px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.btn-primary .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default .badge {
+  color: #fff;
+  background-color: #333;
+}
+</style><!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TBZ93HK');</script>
+        <!-- End Google Tag Manager -->
+        </head>
+    <body class="login_auth" onload="validacoes();" ondragstart="return false">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBZ93HK"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <div class="loader-wrapper">
+            <div class="loader is-loading"></div>
+        </div>
+        <section class="section-geral">
+            <div class="columns">
+                <div class="column is-hidden-mobile">
+                    <object data="https://gw-sas-v2.s3.us-east-2.amazonaws.com/projeto-saas/templates/tela-login/anuncio-lado-esquerdo/infos-login.html" style="width: 100%;height: 100%;"></object>
+                </div>
+                <div class="hr-vr is-hidden-mobile"></div>
+                <div class="column">
+                    <div class="div-imagem-form">
+                        <img src="resources/images/logo-gw-login-menor.png">
+                    </div>
+                    <div class="div-form">
+                        <div class="content-form">
+                                <form method="post" id="form_login" action="./home">
+                                    <input type="hidden" name="ip" id="ip" value="45.5.91.201">
+                                    <input type="hidden" name="cidade" id="cidade" value="Abreu e Lima">
+                                    <input type="hidden" name="estado" id="estado" value="Pernambuco">
+                                    <input type="hidden" name="operadora" id="operadora" value="F DOS S BEZERRA PONTES - ME">
+                                    <input type="hidden" name="lat" id="lat" value="-7.8846">
+                                    <input type="hidden" name="lon" id="lon" value="-34.9866">
+                                    <input type="hidden" name="token" id="token" value="">
+                                    <input type="hidden" name="guid" id="guid" value="">
+
+                                    <div class="field">
+                                        <label class="label">E-mail:</label>
+                                        <div class="control">
+                                            <input class="input" name="login" id="login" type="text" placeholder="Digite seu e-mail" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="field">
+                                        <label class="label">Senha:</label>
+                                        <div class="control">
+                                            <input class="input" name="senha" id="senha" type="password" placeholder="Digite sua senha">
+                                        </div>
+                                    </div>
+                                    <!--<div class="g-recaptcha" data-sitekey="6LcI7rwUAAAAANhneD8bGk0Ny-NGoF69plTKv8T5"></div>-->
+                                    <div class="field is-grouped" style="flex-direction: column;">
+                                        <label class="label label-erro">
+                                            
+                                                    Informe os dados de usuário
+                                                </label>
+                                        <div class="control is-center-login">
+                                            <button class="button is-link button-login">Login</button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="columns is-desktop">
+                                        <div class="column" style="padding: 0;text-align: center;"><label class="label label-link" id="esqueceu-senha"><a>Esqueceu a senha?</a></label></div>
+                                        <div class="column" style="padding: 0;text-align: center;"><label class="label link-cadastrar"><a>Ainda não possui cadastro?</a></label></div>
+                                    </div>
+                                    <div class="field has-text-centered" style="margin-top: 40px;">
+                                        <img src="resources/images/icones-login-webtrans-2.png">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        <div class="modal micromodal-slide" id="modal-recuperar-senha" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-cadastro-title" style="width: 300px;height: 360px;">
+                    <header class="modal__header" style="padding: 10px;">
+                        <center>
+                            <img src="resources/images/logo-gw-login-menor.png" width="50%">
+                        </center>
+                    </header>
+                    <main class="modal__content" id="modal-cadastro-content" style="height: inherit;overflow: hidden;max-height: unset;">
+                        <div class="content-form" style="padding: 15px;">
+                            <div class="titulo-recuperacao-senha">Esqueceu a senha?</div>
+                            <div class="box">
+                                <div class="field">
+                                    <label class="label">Informe seu e-mail:</label>
+                                    <div class="control">
+                                        <input class="input" name="email-recuperar" id="email-recuperar" type="text" placeholder="Digite seu e-mail" autocomplete="off">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="field">
+                                    <center>
+                                        <button class="button is-link button-recuperar-senha" onclick="recuperarSenha('https://api3.gwsistemas.com.br/api-gwsistemas-prod', jQuery('#email-recuperar').val(), false)">Recuperar conta</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <div class="modal micromodal-slide" id="modal-cadastro" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-cadastro-title" style="width: 85%;height: 95%;max-width: unset;max-height: unset;">
+                    <header class="modal__header" style="padding: 10px;">
+                        <center>
+                            <img src="resources/images/logo-gw-login-menor.png" width="120px">
+                            <!--<div class="titulo-informacao">Esqueci a Senha</div>-->
+                        </center>
+                        <!--<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>-->
+                    </header>
+                    <main class="modal__content" id="modal-cadastro-content" style="height: calc(100% - 65px);overflow: hidden;max-height: unset;">
+                        <object id="cadastro" data="https://gw-sas-v2.s3.us-east-2.amazonaws.com/portal/recurso/PROD/index.html?stage=PROD" style="width: 100%;height: 100%;overflow-x: hidden;"></object>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <div class="modal micromodal-slide" id="modal-cnpj" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close="">
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-cnpj" style="width: 300px;height: 360px;">
+                    <header class="modal__header" style="padding: 10px;">
+                        <center>
+                            <img src="resources/images/logo-gw-login-menor.png" width="50%">
+                        </center>
+                    </header>
+                    <main class="modal__content" id="modal-cadastro-content" style="height: inherit;overflow: hidden;max-height: unset;">
+                        <div class="content-form" style="padding: 15px;">
+                            <div class="titulo-recuperacao-senha">Informe o CNPJ da empresa</div>
+                            <div class="box">
+                                <div class="field">
+                                    <label class="label" for="cnpj">CNPJ:</label>
+                                    <div class="control">
+                                        <input class="input" name="cnpj" id="cnpj" type="text" placeholder="Informe o CNPJ" autocomplete="off">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="field">
+                                    <center>
+                                        <button class="button is-link button-recuperar-senha" onclick="buscarUsuarioOrganizacao('https://api3.gwsistemas.com.br/api-gwsistemas-prod', 'PROD')">Buscar usuário</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/jquery-1.9.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js" type="application/javascript"></script>
+        <script src="assets/js/docs.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="js/index.js?v=7" type="text/javascript"></script>
+        <script>
+            if (false) {
+                window.close();
+            }
+
+            jQuery(".help-block").text("Versão: 6.6");
+
+            function validacoes() {
+                // a chamada abaixo é necessária para que não sobreponha os campos de login/senha da tela;
+                jQuery(".div-mudar-senha").css("display", "none");
+            }
+
+            const linkGweb = 'https://gweb.saas2.gwsistemas.com.br'
+
+            </script>
+    
+
+</body></html>

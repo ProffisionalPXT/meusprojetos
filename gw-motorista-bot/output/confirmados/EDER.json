@@ -1,0 +1,103 @@
+{
+  "caso_nome": "EDER",
+  "rntrc_tac": "",
+  "motorista": {
+    "categoria": "Motorista (Transporte)",
+    "cpf": "00083672133",
+    "nome": "EDER NEVES DE SOUSA",
+    "apelido": "",
+    "telefone_fixo": "",
+    "telefone_celular": "",
+    "data_nascimento": "18/08/1984",
+    "sexo": "Masculino",
+    "cep": "75020010",
+    "endereco": "AVENIDA BRASIL",
+    "bairro": "CENTRO",
+    "complemento": "",
+    "cidade": "ANAPOLIS",
+    "uf": "GO",
+    "naturalidade": "ANAPOLIS",
+    "nacionalidade": "BRASILEIRO",
+    "estado_civil": "",
+    "nome_pai": "MOACIR NEVES DE SOUSA",
+    "nome_mae": "MARIA OSCALINA NEVES",
+    "rg": "4487247",
+    "orgao_emissor": "DGPC GO",
+    "cnh": "02878161902",
+    "validade_cnh": "14/09/2032",
+    "data_emissao_cnh": "08/11/2022",
+    "local_emissao_cnh": "GOIANIA/GO",
+    "categoria_cnh": "AE",
+    "data_primeira_habilitacao": "27/05/2003",
+    "tipo_motorista": "Carreteiro",
+    "placa_veiculo": "ONB7E61",
+    "placa_carreta": "TGB6B52",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\CARROCERIAS METALICAS SOLDA FORTE LTDA -TGB-6B52 - ANDRE.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\CNH-e.pdf.pdf",
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\ONB7E61.pdf"
+    ]
+  },
+  "veiculo": {
+    "categoria": "Veículo Terrestre",
+    "placa": "ONB7E61",
+    "renavam": "00512620040",
+    "chassi": "9BSR6X400D3823457",
+    "marca_modelo_versao": "SCANIA R 440 A6X4",
+    "modelo": "SCANIA R 440 A6X4",
+    "marca": "SCANIA R 440 A6X4",
+    "ano_mod": "2013",
+    "ano_fab": "2013",
+    "cor": "BRANCA",
+    "tipo": "CAVALO",
+    "tipo_frota": "Carreteiro",
+    "cidade": "ANAPOLIS",
+    "uf": "GO",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "CARROCERIAS METALICAS SOLDA FORTE LTDA",
+    "proprietario": "DadosProprietario(nome='CARROCERIAS METALICAS SOLDA FORTE LTDA', cpf_cnpj='09310658000174', tipo_doc='CNPJ', rg='', inscricao_estadual='0000000', cidade='ANAPOLIS', uf='GO', rntrc='', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\ONB7E61.pdf"
+    ]
+  },
+  "carreta": {
+    "categoria": "Veículo Terrestre",
+    "placa": "TGB6B52",
+    "renavam": "01476378204",
+    "chassi": "96408153TTS004660",
+    "marca_modelo_versao": "SR GUERRASP GSI 3E",
+    "modelo": "SR GUERRASP GSI 3E",
+    "marca": "SR GUERRASP GSI 3E",
+    "ano_mod": "2026",
+    "ano_fab": "2026",
+    "cor": "PRETA",
+    "tipo": "CARRETA",
+    "tipo_frota": "Carreteiro",
+    "cidade": "ANAPOLIS",
+    "uf": "GO",
+    "cap_carga": "27000",
+    "tara": "27000",
+    "proprietario_nome": "CARROCERIAS METALICAS SOLDA FORTE LTDA",
+    "proprietario": "DadosProprietario(nome='CARROCERIAS METALICAS SOLDA FORTE LTDA', cpf_cnpj='09310658000174', tipo_doc='CNPJ', rg='', inscricao_estadual='0000000', cidade='ANAPOLIS', uf='GO', rntrc='', fotos=[])",
+    "fotos": [
+      "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\CARROCERIAS METALICAS SOLDA FORTE LTDA -TGB-6B52 - ANDRE.pdf"
+    ]
+  },
+  "proprietario": {
+    "nome": "CARROCERIAS METALICAS SOLDA FORTE LTDA",
+    "cpf_cnpj": "09310658000174",
+    "tipo_doc": "CNPJ",
+    "rg": "",
+    "inscricao_estadual": "0000000",
+    "cidade": "ANAPOLIS",
+    "uf": "GO",
+    "rntrc": "",
+    "fotos": []
+  },
+  "arquivos": [
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\CARROCERIAS METALICAS SOLDA FORTE LTDA -TGB-6B52 - ANDRE.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\CNH-e.pdf.pdf",
+    "C:\\Users\\TRANSRAP05\\Desktop\\gw-motorista-bot\\input\\EDER\\ONB7E61.pdf"
+  ]
+}
