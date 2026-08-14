@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CHEP Bot - Painel Web & Celular</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: rgba(22, 30, 46, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-blue: #38bdf8;
+      --accent-green: #22c55e;
+      --accent-amber: #f59e0b;
+      --accent-purple: #c084fc;
+      --accent-red: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 15px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      font-size: 28px;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .ip-badge {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .conn-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-conn {
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-conn:hover { background: #334155; }
+    .btn-conn.green { background: #166534; border-color: #22c55e; }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-blue);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border 0.2s;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-blue);
+    }
+
+    .criacao-linha-panel {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 15px;
+    }
+
+    .criacao-linha-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .test-mode-banner {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--accent-amber);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+      transition: transform 0.1s, filter 0.2s;
+    }
+
+    .btn-submit:hover { filter: brightness(1.1); }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-submit.real-mode {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
+    }
+
+    .log-box {
+      background: #020617;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      height: 210px;
+      max-height: 210px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #e2e8f0;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .log-entry { margin-bottom: 3px; }
+
+    .btn-remove-photo {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: var(--accent-red);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    .profile-indicator {
+      background: rgba(192, 132, 252, 0.2);
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      color: var(--accent-purple);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .delivery-status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .status-badge.yellow {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--accent-amber);
+    }
+
+    .status-badge.purple {
+      background: rgba(192, 132, 252, 0.2);
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      color: var(--accent-purple);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <span class="brand-icon">🤖</span>
+        <div>
+          <h1>CHEP Bot - Painel Web</h1>
+          <span style="font-size: 12px; color: var(--text-muted);">Acesse pelo Celular ou PC</span>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span class="ip-badge">📱 Celular: http://{{ local_ip }}:5000</span>
+        <div class="conn-buttons">
+          <button class="btn-conn" onclick="connectChrome('cdp', event)">🔗 Conectar Chrome Aberto</button>
+          <button class="btn-conn green" onclick="connectChrome('new', event)">🚀 Abrir Novo Chrome</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-grid">
+      <!-- ESQUERDA: FORMULÁRIO -->
+      <div>
+        <form id="occForm" onsubmit="submitForm(event)">
+          <!-- PERFIL -->
+          <div class="card">
+            <div class="card-title">👤 Perfil Ativo CHEP</div>
+            <select id="profile" name="profile" onchange="updateProfileIndicator()">
+              <option value="BR__LH_PURM2">BR__LH_PURM2 (Perfil 2)</option>
+              <option value="BR__LH_PURM3">BR__LH_PURM3 (Perfil 3)</option>
+            </select>
+          </div>
+
+          <!-- DELIVERY -->
+          <div class="card">
+            <div class="card-title">1. Número de Delivery / Carga</div>
+            <input type="text" id="delivery" name="delivery" placeholder="Ex: 3788216684" required>
+            
+            <label class="checkbox-group" style="margin-top: 12px; margin-bottom: 0;">
+              <input type="checkbox" id="chk_coleta_dia" name="chk_coleta_dia">
+              <span style="font-weight: 700; color: var(--accent-purple);">🚚 COLETA DO DIA (Iniciar Monitoramento a cada 20 min)</span>
+            </label>
+          </div>
+
+          <!-- MOTORISTA -->
+          <div class="card">
+            <label class="checkbox-group">
+              <input type="checkbox" id="chk_driver" onchange="toggleDriver()">
+              <span style="font-weight: 700; color: #fff;">2. Ocorrência de Dados do Motorista</span>
+            </label>
+            
+            <div id="driver_box">
+              <select id="driver_id" onchange="onDriverChange()">
+                <option value="">-- Sem Motorista (Em Branco) --</option>
+                {% for d in drivers %}
+                <option value="{{ d.id }}" data-name="{{ d.name }}" data-cpf="{{ d.cpf }}" data-placa="{{ d.placa }}">{{ d.name }} (CPF: {{ d.cpf }})</option>
+                {% endfor %}
+              </select>
+              <textarea id="driver_text" name="driver_text" style="margin-top: 10px;" placeholder="Texto formatado do motorista..."></textarea>
+            </div>
+          </div>
+
+          <!-- MENSAGEM / STATUS -->
+          <div class="card">
+            <label class="checkbox-group">
+              <input type="checkbox" id="chk_location" onchange="toggleLocation()">
+              <span style="font-weight: 700; color: #fff;">3. Ocorrência de Status / Localização / Coletado / Linha</span>
+            </label>
+
+            <div id="location_box">
+              <select id="msg_select" onchange="onMessageChange()">
+                <option value="">-- Selecione uma Mensagem Pronta --</option>
+                {% for m in messages %}
+                <option value="{{ m.id }}" data-type="{{ m.note_type }}" data-text="{{ m.text }}" data-linha="{{ 'true' if m.is_criacao_linha else 'false' }}">{{ m.title }}</option>
+                {% endfor %}
+                <option value="custom">-- Texto Livre Personalizado --</option>
+              </select>
+
+              <label style="margin-top: 10px;">Tipo de Nota CHEP:</label>
+              <input type="text" id="note_type" name="note_type" value="SAP (Not App) LOCALIZAÇÃO DO VEÍCULO">
+
+              <!-- PAINEL CRIAÇÃO DE LINHA / SEM PALETES -->
+              <div id="criacao_linha_panel" class="criacao-linha-panel" style="display: none; margin-top: 10px;">
+                <div id="panel_title_linha" style="font-size: 12px; font-weight: 700; color: var(--accent-blue); margin-bottom: 6px;">⚙️ Gerador de Criação de Linhas:</div>
+                
+                <div id="linha_subfields">
+                  <div class="criacao-linha-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div>
+                      <label>Qtd Paletes:</label>
+                      <input type="number" id="cl_paletes_qtd" value="125" oninput="updateLinhaPreview()">
+                    </div>
+                    <div>
+                      <label>Qtd NFs:</label>
+                      <input type="number" id="cl_nfs_qtd" value="2" oninput="updateLinhasDefault(); updateLinhaPreview()">
+                    </div>
+                    <div>
+                      <label>Qtd Linhas:</label>
+                      <input type="number" id="cl_linhas_qtd" value="1" oninput="updateLinhaPreview()">
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px;">
+                    <div style="font-size: 11px; font-weight: 600; color: var(--accent-amber); margin-bottom: 4px;">Modo Opcional: Alterar Ordem (CNPJ)</div>
+                    <div class="criacao-linha-grid">
+                      <div>
+                        <label>Nº NF:</label>
+                        <input type="text" id="cl_nf" value="2763971" oninput="updateLinhaPreview()">
+                      </div>
+                      <div>
+                        <label>CNPJ:</label>
+                        <input type="text" id="cl_cnpj" value="06.189.213/0001-90" oninput="updateLinhaPreview()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="sem_paletes_subfields" style="display: none;">
+                  <label>Nome do Responsável / Sr.:</label>
+                  <input type="text" id="sr_nome" value="Leandro" placeholder="Ex: Leandro, Carlos, etc." oninput="updateLinhaPreview()">
+                </div>
+              </div>
+
+              <label style="margin-top: 10px;">Texto da Mensagem:</label>
+              <textarea id="location_text" name="location_text"></textarea>
+            </div>
+          </div>
+
+          <!-- 2º SITE & ANEXOS -->
+          <div class="card">
+            <label class="checkbox-group">
+              <input type="checkbox" id="chk_contact" name="chk_contact">
+              <span style="font-weight: 700; color: var(--accent-blue);">🌐 Responder no 2º site (contact.cmaweb.chep.com)</span>
+            </label>
+
+            <div style="margin-top: 10px;">
+              <label>📷 Anexar Foto NF / Comprovante (WhatsApp / Tirar Foto):</label>
+              <input type="file" id="photo" name="photo" accept="image/*,application/pdf">
+              <div style="margin-top: 5px;">
+                <button type="button" class="btn-remove-photo" onclick="clearPhoto()">❌ Remover Foto Anexada</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px;">
+            <button type="button" class="btn-submit real-mode" style="background-color: var(--accent-green); color: white;" onclick="submitCustomForm(event)">⚡ CRIAR OCORRÊNCIA (Depende da sua Aprovação Visual)</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- DIREITA: DELIVERIES DO DIA & LOGS -->
+      <div>
+        <div class="card" style="background: rgba(30, 27, 75, 0.85); border-color: rgba(192, 132, 252, 0.3);">
+          <div class="card-title" style="color: var(--accent-purple); justify-content: space-between;">
+            <span>📋 Deliveries Monitoradas</span>
+            <span id="mon_profile_badge" class="profile-indicator">Perfil: BR__LH_PURM2</span>
+          </div>
+
+          <!-- CAMPO DEDICADO DO PAINEL DIREITO PARA MONITORAR / VERIFICAR -->
+          <div style="margin-top: 10px; margin-bottom: 10px;">
+            <label style="font-size: 12px; font-weight: 700; color: var(--accent-purple); display: block; margin-bottom: 4px;">Digitar Delivery para Verificar / Monitorar:</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="right_delivery" class="input-field" placeholder="Ex: 3788216684" style="flex: 1;" onkeydown="if(event.key==='Enter'){ event.preventDefault(); verifySingleDelivery(event); }">
+              <button type="button" class="btn-conn" style="background: var(--accent-blue);" onclick="verifySingleDelivery(event)">🔍 Verificar</button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+            <label class="checkbox-group" style="margin: 0;" title="Marcado: adiciona a delivery à lista de monitoramento automático. Desmarcado: verifica apenas uma vez.">
+              <input type="checkbox" id="chk_auto_mon" checked>
+              <span style="font-size: 12px; font-weight: 700; color: var(--accent-purple);">📌 Adicionar ao Monitoramento (20 min)</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <button type="button" class="btn-conn" style="background: #7c3aed; width: 100%; justify-content: center;" onclick="checkRepliesNow()">🔍 Verificar Agora (Monitoradas)</button>
+          </div>
+
+          <textarea id="daily_deliveries_box" readonly placeholder="Lista de deliveries em monitoramento (adicione pelo campo acima)..."></textarea>
+
+          <!-- PAINEL DE STATUS DAS DELIVERIES (SEM ENCHER OS LOGS) -->
+          <div style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--accent-purple); margin-bottom: 6px;">Status em Tempo Real:</div>
+            <div id="statusList" class="delivery-status-list"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Logs de Execução Resumidos</div>
+          <div id="logBox" class="log-box"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let monitorTimer = null;
+
+    function updateProfileIndicator() {
+      const p = document.getElementById('profile').value;
+      document.getElementById('mon_profile_badge').innerText = `Perfil: ${p}`;
+    }
+
+    function toggleDriver() {
+      const active = document.getElementById('chk_driver').checked;
+      document.getElementById('driver_box').style.opacity = active ? '1' : '0.4';
+    }
+
+    function toggleLocation() {
+      const active = document.getElementById('chk_location').checked;
+      const box = document.getElementById('location_box');
+      box.style.opacity = active ? '1' : '0.4';
+      box.style.pointerEvents = active ? 'auto' : 'none';
+    }
+
+    function onDriverChange() {
+      const sel = document.getElementById('driver_id');
+      const opt = sel.options[sel.selectedIndex];
+      const name = opt.getAttribute('data-name');
+      const cpf = opt.getAttribute('data-cpf');
+      const placa = opt.getAttribute('data-placa');
+
+      if (name) {
+        document.getElementById('driver_text').value = `Segue abaixo dados do veiculo e motorista que irá realizar a coleta.\n\nNOME: ${name}\nCPF: ${cpf}\nPLACA: ${placa}`;
+      } else {
+        document.getElementById('driver_text').value = '';
+      }
+    }
+
+    function onMessageChange() {
+      const sel = document.getElementById('msg_select');
+      const opt = sel.options[sel.selectedIndex];
+      const type = opt.getAttribute('data-type');
+      const text = opt.getAttribute('data-text');
+      const isLinha = opt.getAttribute('data-linha') === 'true' || sel.value.includes('criacao_de_linha');
+      const isSemPaletes = sel.value === 'sem_paletes_no_d' || sel.value === 'sem_agendamento';
+
+      if (type) document.getElementById('note_type').value = type;
+      if (text) document.getElementById('location_text').value = text;
+
+      if (sel.value.includes('deslocamento') || sel.value.includes('bloqueio') || sel.value.includes('resposta')) {
+        document.getElementById('chk_contact').checked = true;
+        document.getElementById('chk_location').checked = false;
+        toggleLocation();
+      } else {
+        document.getElementById('chk_contact').checked = false;
+      }
+
+      const panel = document.getElementById('criacao_linha_panel');
+      const linhaFields = document.getElementById('linha_subfields');
+      const semPaletesFields = document.getElementById('sem_paletes_subfields');
+      const title = document.getElementById('panel_title_linha');
+
+      if (isLinha || isSemPaletes) {
+        panel.style.display = 'block';
+        if (isSemPaletes) {
+          title.innerText = '👤 Editar Nome do Responsável:';
+          linhaFields.style.display = 'none';
+          semPaletesFields.style.display = 'block';
+          if (sel.value === 'sem_agendamento' && document.getElementById('sr_nome').value === 'Leandro') {
+            document.getElementById('sr_nome').value = 'Andre';
+          }
+        } else {
+          title.innerText = '⚙️ Gerador de Criação de Linhas:';
+          linhaFields.style.display = 'block';
+          semPaletesFields.style.display = 'none';
+        }
+        updateLinhaPreview();
+      } else {
+        panel.style.display = 'none';
+      }
+    }
+
+    function updateLinhasDefault() {
+      const nfs = parseInt(document.getElementById('cl_nfs_qtd').value) || 2;
+      document.getElementById('cl_linhas_qtd').value = Math.max(1, nfs - 1);
+    }
+
+    function updateLinhaPreview() {
+      const sel = document.getElementById('msg_select').value;
+      
+      if (sel === 'criacao_de_linha_geral') {
+        const paletes = parseInt(document.getElementById('cl_paletes_qtd').value) || 125;
+        const nfs = parseInt(document.getElementById('cl_nfs_qtd').value) || 2;
+        const linhasPedidas = parseInt(document.getElementById('cl_linhas_qtd').value) || 1;
+        
+        const texto = `Veiculo carregado com ${paletes} paletes e ${nfs} NF.\n\nFavor gera ${linhasPedidas} linha.`;
+        document.getElementById('location_text').value = texto;
+      } else if (sel === 'criacao_de_linha') {
+        const nf = document.getElementById('cl_nf').value || '2763971';
+        const paletes = document.getElementById('cl_paletes_qtd').value || '408';
+        const cnpj = document.getElementById('cl_cnpj').value || '06.189.213/0001-90';
+        document.getElementById('location_text').value = `Favor Alterar Ordem, pois a Nota Fiscal ${nf}. ${paletes} Pallets saiu com o CNPJ: ${cnpj}`;
+      } else if (sel === 'sem_paletes_no_d') {
+        const nome = document.getElementById('sr_nome').value.trim() || 'Leandro';
+        document.getElementById('location_text').value = `Veiculo no D aguardando para carregar, onde o motorista foi informado pelo Sr. ${nome} que o D não tem paletes para carregar.\n\nFavor, verificar e como proceder.`;
+      } else if (sel === 'sem_agendamento') {
+        const nome = document.getElementById('sr_nome').value.trim() || 'Andre';
+        document.getElementById('location_text').value = `Veiculo no D aguardando para carregar, motorista foi informado pelo Sr. ${nome} que não tem agendamento para o dia de hoje, e que não será possível realizar o carregamento CHEP.\n\nFavor, verificar e como proceder.`;
+      }
+    }
+
+    function clearPhoto() {
+      document.getElementById('photo').value = '';
+    }
+
+    function toggleTestMode() {
+      const isTest = document.getElementById('chk_test_mode').checked;
+      const btn = document.getElementById('btnSubmit');
+      if (isTest) {
+        btn.innerText = "🧪 SIMULAR E TESTAR (NÃO SALVA)";
+        btn.className = "btn-submit";
+      } else {
+        btn.innerText = "⚡ EXECUTAR OCORRÊNCIA REAL";
+        btn.className = "btn-submit real-mode";
+      }
+    }
+
+    function connectChrome(mode, evt) {
+      const btn = (evt && evt.target) ? evt.target : null;
+      const origText = btn ? btn.innerText : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Conectando...';
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+      fetch('/api/connect_chrome', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode: mode, profile: document.getElementById('profile').value }),
+        signal: controller.signal
+      })
+      .then(res => res.json())
+      .then(data => {
+        clearTimeout(timeoutId);
+        alert(data.success ? `Conectado via ${data.mode}!` : `Erro ao conectar ${data.mode}: ${data.error}`);
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          alert('⚠️ A requisição demorou mais de 5 segundos, mas a tentativa de conexão foi iniciada no servidor.');
+        } else {
+          alert(`⚠️ Falha ao conectar Chrome: ${err.message}`);
+        }
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = origText;
+        }
+      });
+    }
+
+    function syncDailyDeliveriesToServer() {
+      const rawText = document.getElementById('daily_deliveries_box').value;
+      const deliveries = rawText.split('\n').map(s => s.trim()).filter(Boolean);
+
+      fetch('/api/save_daily_deliveries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deliveries: deliveries })
+      });
+    }
+
+    function removeDelivery(deliveryNum) {
+      fetch('/api/remove_monitoring', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delivery: deliveryNum })
+      }).then(res => res.json()).then(data => {
+        if (data.monitored_deliveries) {
+          document.getElementById('daily_deliveries_box').value = data.monitored_deliveries.join('\n');
+        }
+        if (data.statuses) renderStatuses(data.statuses);
+        fetchLogs();
+      });
+    }
+
+    let globalLastCheckTime = 0;
+    let globalServerTime = 0;
+
+    fetchLogs();
+
+    let globalStatuses = {};
+
+    function updateTimers() {
+      const rawText = document.getElementById('daily_deliveries_box').value;
+      const deliveries = rawText.split('\n').map(s => s.trim()).filter(Boolean);
+
+      deliveries.forEach(d => {
+        const el = document.getElementById(`timer_val_${d}`);
+        if (!el) return;
+
+        const isTimerAtivo = el.getAttribute('data-timer-ativo') !== 'false';
+        const requerAtencao = el.getAttribute('data-requer-atencao') === 'true';
+
+        let nextMs = parseInt(el.getAttribute('data-next') || '0');
+        if (!nextMs && globalStatuses && globalStatuses[d]) {
+          nextMs = globalStatuses[d].proxima_verificacao || 0;
+        }
+
+        const now = Date.now();
+        const diff = nextMs - now;
+
+        const statusStr = el.getAttribute('data-status') || '';
+
+        let timerText = "";
+        if (statusStr === 'limite_atingido') {
+          timerText = "Fim (Zerar)";
+        } else if (requerAtencao) {
+          timerText = "Aguardando Confirmação (OK)";
+        } else if (diff > 0 && isTimerAtivo) {
+          const mins = Math.floor(diff / 60000);
+          const secs = Math.floor((diff % 60000) / 1000);
+          timerText = `${mins}:${secs.toString().padStart(2, '0')} min`;
+        } else {
+          timerText = "Verificando...";
+        }
+
+        el.innerText = timerText;
+      });
+    }
+
+    setInterval(updateTimers, 1000);
+
+    function confirmOk(deliveryNum, evt) {
+      const btn = (evt && evt.target) ? evt.target : null;
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳...';
+      }
+
+      fetch('/api/confirm_ok', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delivery: deliveryNum })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.statuses) renderStatuses(data.statuses);
+        fetchLogs();
+      })
+      .catch(err => {
+        alert('⚠️ Erro ao confirmar OK: ' + err.message);
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = '✅ OK';
+        }
+      });
+    }
+
+    function verificarAgora() {
+      const btn = document.getElementById('btnVerificarAgora');
+      const origText = btn ? btn.innerText : '🔍 Verificar Agora (Monitoradas)';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Iniciando...';
+      }
+
+      fetch('/api/check_now', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.statuses) renderStatuses(data.statuses);
+        fetchLogs();
+        if (data.message || data.status) alert(data.message || data.status);
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          alert('⚠️ A requisição demorou mais de 5 segundos, mas a verificação foi enviada ao servidor.');
+        } else {
+          alert('⚠️ Erro ao disparar verificação: ' + err.message);
+        }
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = origText;
+        }
+      });
+    }
+
+    function renderStatuses(statuses) {
+      if (statuses) globalStatuses = statuses;
+      const rawText = document.getElementById('daily_deliveries_box').value;
+      const deliveries = rawText.split('\n').map(s => s.trim()).filter(Boolean);
+      const list = document.getElementById('statusList');
+
+      if (deliveries.length === 0) {
+        list.innerHTML = `<div style="font-size:12px; color:#94a3b8; padding: 10px; text-align: center;">Nenhuma delivery em monitoramento contínuo.</div>`;
+        return;
+      }
+
+      list.innerHTML = deliveries.map(d => {
+        const stObj = (statuses && typeof statuses[d] === 'object') ? statuses[d] : null;
+        
+        const profileStr = stObj ? (stObj.perfil || stObj.profile || 'BR__LH_PURM2') : 'BR__LH_PURM2';
+        const ciclos = stObj ? (stObj.ciclos_concluidos !== undefined ? stObj.ciclos_concluidos : (stObj.count || 0)) : 0;
+        const maxCiclos = stObj ? (stObj.max_ciclos || 4) : 4;
+        const timerAtivo = stObj ? (stObj.timer_ativo !== false) : true;
+        const requerAtencao = stObj ? (!!stObj.requer_atencao || !!stObj.resposta_encontrada) : false;
+        
+        let statusRaw = stObj ? (stObj.status || 'Aguardando resposta da CHEP') : 'Aguardando resposta da CHEP';
+        let statusText = (statusRaw === 'aguardando_resposta' || !statusRaw) ? 'Aguardando resposta da CHEP' : statusRaw;
+
+        let nextMs = 0;
+        if (stObj) {
+          const pv = stObj.proxima_verificacao;
+          if (typeof pv === 'number' && pv > 1000000000000) {
+            nextMs = pv;
+          } else if (typeof pv === 'number' && pv > 0) {
+            nextMs = pv * 1000;
+          } else if (stObj.proxima_verificacao_ts) {
+            nextMs = parseFloat(stObj.proxima_verificacao_ts) * 1000;
+          }
+        }
+        if (!nextMs || isNaN(nextMs) || nextMs <= 0) {
+          nextMs = Date.now() + 20 * 60 * 1000;
+        }
+
+        const now = Date.now();
+        const diff = nextMs - now;
+
+        let initialTimerStr = "Verificando...";
+        if (statusRaw === 'limite_atingido') {
+          initialTimerStr = "Fim (Zerar)";
+        } else if (requerAtencao) {
+          initialTimerStr = "Aguardando Confirmação (OK)";
+        } else if (diff > 0 && timerAtivo) {
+          const mins = Math.floor(diff / 60000);
+          const secs = Math.floor((diff % 60000) / 1000);
+          initialTimerStr = `${mins}:${secs.toString().padStart(2, '0')} min`;
+        }
+
+        const statusDot = requerAtencao ? "🟣" : "🟡";
+        const containerBg = requerAtencao 
+          ? "background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(126, 34, 206, 0.35)); border: 1px solid rgba(192, 132, 252, 0.8); box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);"
+          : "background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.08);";
+
+        const actionBtnHtml = requerAtencao
+          ? `<button type="button" onclick="confirmOk('${d}', event)" style="background: #22c55e; color: white; border: none; border-radius: 6px; padding: 4px 10px; font-weight: 800; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;" title="Confirmar e reiniciar timer">✅ OK</button>`
+          : `<button type="button" onclick="removeDelivery('${d}')" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); color: #ef4444; border-radius: 6px; padding: 4px 8px; font-weight: 700; cursor: pointer;" title="Parar e remover monitoramento">❌</button>`;
+
+        return `
+          <div class="status-card-item" style="${containerBg} display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; font-size: 13px;">
+            <!-- Lado Esquerdo: Badge Perfil + Ponto + Delivery -->
+            <div style="display: flex; align-items: center; gap: 8px; min-width: 170px;">
+              <span style="background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(129, 140, 248, 0.5); color: #818cf8; font-weight: 700; font-size: 11px; padding: 2px 6px; border-radius: 4px;">[${profileStr}]</span>
+              <span>${statusDot}</span>
+              <strong style="color: #f8fafc; font-size: 13px;">#${d}</strong>
+            </div>
+
+            <!-- Centro: Badge Ciclo + Texto Status -->
+            <div style="display: flex; align-items: center; gap: 8px; flex: 1; justify-content: center; text-align: center;">
+              <span style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 4px; white-space: nowrap;">${ciclos}/${maxCiclos}</span>
+              <span style="color: ${requerAtencao ? '#e9d5ff' : '#f8fafc'}; font-weight: ${requerAtencao ? '800' : '500'}; flex: 1;">${statusText}</span>
+            </div>
+
+            <!-- Lado Direito: Timer Badge + Botão Ação -->
+            <div style="display: flex; align-items: center; gap: 8px; min-width: 210px; justify-content: flex-end;">
+              <span style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 6px; font-weight: 700; color: ${requerAtencao ? '#e9d5ff' : '#38bdf8'}; font-size: 12px; display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                ⏱️ <span id="timer_val_${d}" data-next="${nextMs}" data-timer-ativo="${timerAtivo}" data-requer-atencao="${requerAtencao}" data-status="${statusRaw}">${initialTimerStr}</span>
+              </span>
+              ${actionBtnHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function fetchLogs() {
+      fetch('/api/logs').then(res => res.json()).then(data => {
+        const box = document.getElementById('logBox');
+        const isScrolledToBottom = (box.scrollHeight - box.clientHeight <= box.scrollTop + 50);
+        box.innerHTML = data.logs.map(l => `<div class="log-entry">${l}</div>`).join('');
+        if (isScrolledToBottom) {
+          box.scrollTop = box.scrollHeight;
+        }
+        
+        if (data.last_check_time) globalLastCheckTime = data.last_check_time;
+        if (data.server_time) globalServerTime = data.server_time;
+
+        if (data.monitored_deliveries) {
+          document.getElementById('daily_deliveries_box').value = data.monitored_deliveries.join('\n');
+        }
+
+        if (data.statuses) {
+          renderStatuses(data.statuses);
+        }
+      });
+    }
+    setInterval(fetchLogs, 2000);
+
+    function checkRepliesNow(isManual = true) {
+      const rawText = document.getElementById('daily_deliveries_box').value;
+      const deliveries = rawText.split('\n').map(s => s.trim()).filter(Boolean);
+      const profile = document.getElementById('profile').value;
+
+      if (deliveries.length === 0) {
+        if (isManual) alert('Nenhuma delivery cadastrada na lista de Deliveries Monitoradas!');
+        return;
+      }
+
+      fetch('/api/check_replies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deliveries: deliveries, profile: profile })
+      }).then(res => res.json()).then(data => {
+        if (data.last_check_time) globalLastCheckTime = data.last_check_time;
+        if (data.server_time) globalServerTime = data.server_time;
+        if (data.statuses) renderStatuses(data.statuses);
+        if (isManual) {
+          alert(`✅ Verificação de Respostas iniciada em background para o perfil ${profile}! Acompanhe os logs.`);
+        }
+      });
+    }
+
+    function verifySingleDelivery(evt) {
+      const btn = (evt && evt.target) ? evt.target : null;
+      const rightInput = document.getElementById('right_delivery');
+      const deliveryVal = rightInput.value.trim();
+      const profile = document.getElementById('profile').value;
+      const shouldMonitor = document.getElementById('chk_auto_mon').checked;
+
+      if (!deliveryVal) {
+        alert('Por favor, digite o número da Delivery no painel de monitoramento!');
+        rightInput.focus();
+        return;
+      }
+
+      const origText = btn ? btn.innerText : '🔍 Verificar';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Processando...';
+      }
+
+      rightInput.value = '';
+      rightInput.focus();
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+      fetch('/api/check_replies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deliveries: [deliveryVal], profile: profile, add_to_monitor: shouldMonitor }),
+        signal: controller.signal
+      })
+      .then(res => res.json())
+      .then(data => {
+        clearTimeout(timeoutId);
+        if (data.monitored_deliveries) {
+          document.getElementById('daily_deliveries_box').value = data.monitored_deliveries.join('\n');
+        }
+        if (data.statuses) renderStatuses(data.statuses);
+        fetchLogs();
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          alert('⚠️ A requisição demorou mais de 5 segundos, mas o comando de verificação foi enviado.');
+        } else {
+          alert(`⚠️ Erro ao verificar delivery: ${err.message}`);
+        }
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = origText;
+        }
+      });
+    }
+
+    function toggleAutoMonitor() { /* monitoramento global server-side sempre ativo */ }
+
+    function submitCustomForm(evt) {
+      const btn = (evt && evt.target) ? evt.target : document.querySelector('.btn-submit');
+      const form = document.getElementById('occForm');
+      const deliveryInput = document.getElementById('delivery');
+      const deliveryVal = deliveryInput.value.trim();
+      
+      if (!deliveryVal) {
+        alert('Por favor, informe o número da Delivery no Campo 1!');
+        deliveryInput.focus();
+        return;
+      }
+
+      const origText = btn ? btn.innerText : '⚡ CRIAR OCORRÊNCIA';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⚡ CRIANDO OCORRÊNCIA...';
+      }
+
+      const formData = new FormData(form);
+      const isColetaDia = document.getElementById('chk_coleta_dia').checked;
+
+      formData.append('include_driver', document.getElementById('chk_driver').checked);
+      formData.append('include_location', document.getElementById('chk_location').checked);
+      formData.append('include_contact', document.getElementById('chk_contact').checked);
+      formData.append('coleta_dia', isColetaDia);
+
+      deliveryInput.value = '';
+      deliveryInput.focus();
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+      fetch('/api/execute', {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal
+      })
+      .then(res => res.json())
+      .then(data => {
+        clearTimeout(timeoutId);
+        if (data.message) alert(data.message);
+        fetchLogs();
+        clearPhoto();
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          alert('⚠️ Ocorrência enviada! O processamento em segundo plano está em andamento.');
+        } else {
+          alert(`⚠️ Erro ao iniciar ocorrência: ${err.message}`);
+        }
+      })
+      .finally(() => {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = origText;
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProfileIndicator();
+      toggleLocation();
+      fetchLogs();
+    });
+
+    // --- Lógica de Aprovação Visual ---
+    function fetchApprovalStatus() {
+      fetch('/api/approval_status')
+        .then(res => res.json())
+        .then(data => {
+          const modal = document.getElementById('approvalModal');
+          if (data.pending) {
+            document.getElementById('approvalDeliveryText').innerText = data.delivery;
+            document.getElementById('approvalImage').src = data.image_url + "?t=" + new Date().getTime();
+            modal.style.display = 'flex';
+          } else {
+            modal.style.display = 'none';
+          }
+        })
+        .catch(err => console.error(err));
+    }
+    
+    // Checa aprovação a cada 3 segundos
+    setInterval(fetchApprovalStatus, 3000);
+
+    function resolveApproval(action) {
+      document.getElementById('approvalModal').style.display = 'none';
+      fetch('/api/resolve_approval', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: action })
+      }).then(res => res.json()).then(data => {
+        alert(data.message);
+        fetchLogs();
+      });
+    }
+  </script>
+
+  <!-- Modal de Aprovação Visual -->
+  <div id="approvalModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--bg-card); border-radius: 12px; padding: 20px; max-width: 900px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+      <h2 style="color: white; margin-bottom: 10px;">Aprovação Visual - Delivery <span id="approvalDeliveryText"></span></h2>
+      <p style="color: #94a3b8; margin-bottom: 20px;">Verifique os dados preenchidos abaixo. Você tem 5 minutos para aprovar ou cancelar.</p>
+      <img id="approvalImage" src="" style="width: 100%; border-radius: 8px; margin-bottom: 20px; border: 1px solid #334155;">
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <button onclick="resolveApproval('cancel')" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.5); padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; transition: all 0.2s;">❌ Cancelar e Fechar</button>
+        <button onclick="resolveApproval('approve')" style="background: var(--accent-green); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; transition: all 0.2s;">✅ Aprovar e Salvar (Desativado para Teste)</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+434: self.log(f"\n⏳ [2/6] Verificando e abrindo a Modal (Tentativa {attempt}/{max_modal_attempts})...")
+445: self.log(f"   ⏱️ Abrindo modal para Entrega #{delivery_clean}...")
