@@ -25,42 +25,51 @@ def extrair_dados_coleta(caminhos_imagens=None):
             page.wait_for_selector('table', timeout=15000)
             time.sleep(2) # Pausa extra para garantir renderização
             
-            # Encontra as abas de datas
-            botoes = page.locator('button').all()
-            idx_amanha = -1
+            # Encontra as abas de datas e tenta clicar na aba de amanhã
+            js_click_amanha = """
+            () => {
+                const spans = Array.from(document.querySelectorAll('span'));
+                const hojeSpan = spans.find(s => s.textContent.includes('(HOJE)'));
+                if (hojeSpan) {
+                    let el = hojeSpan;
+                    while(el && el.tagName !== 'BODY') {
+                        if (el.nextElementSibling && el.parentElement.children.length > 5) {
+                            el.nextElementSibling.click();
+                            return true;
+                        }
+                        el = el.parentElement;
+                    }
+                }
+                return false;
+            }
+            """
             
-            for i, btn in enumerate(botoes):
-                try:
-                    if '(HOJE)' in btn.inner_text():
-                        idx_amanha = i + 1 # O botão de amanhã é o próximo
-                        break
-                except:
-                    pass
-            
-            if idx_amanha != -1 and idx_amanha < len(botoes):
-                print(f"[SCRAPER] Clicando na aba do dia seguinte...")
-                botoes[idx_amanha].click()
+            print("[SCRAPER] Buscando a aba do dia seguinte...")
+            clicou = page.evaluate(js_click_amanha)
+            if clicou:
+                print("[SCRAPER] Clicando na aba do dia seguinte...")
                 time.sleep(4) # Aguarda a tabela de amanhã carregar
             else:
                 print("[SCRAPER] ATENÇÃO: Não foi possível identificar a aba de amanhã automaticamente. Lendo a aba atual.")
             
-            # Ler a tabela
+            # Ler a tabela de forma precisa nas caixas de input
             print("[SCRAPER] Lendo as linhas da tabela...")
             linhas = page.locator('table tbody tr').all()
             for row in linhas:
-                cols = row.locator('td').all_inner_texts()
-                if len(cols) >= 3:
-                    texto_col_mot = cols[0]
+                try:
+                    motorista_raw = row.locator('select.driver-select').evaluate("sel => sel.options[sel.selectedIndex].text")
+                    motorista_raw = motorista_raw.replace(' ▼', '').strip()
+                    
                     motorista_nome = ""
+                    if "SELECIONE" not in motorista_raw.upper():
+                        # Verifica se o motorista selecionado bate com algum do banco de dados local
+                        for known in motoristas_conhecidos:
+                            if known in motorista_raw.upper():
+                                motorista_nome = known
+                                break
                     
-                    # Procura se algum motorista conhecido foi selecionado
-                    for known in motoristas_conhecidos:
-                        if known in texto_col_mot:
-                            motorista_nome = known
-                            break
-                    
-                    delivery = cols[1].strip()
-                    cliente = cols[2].strip()
+                    delivery = row.locator('input.input-delivery').input_value().strip()
+                    cliente = row.locator('input.input-cliente').input_value().strip()
                     
                     # Só adiciona se tiver motorista e delivery preenchidos
                     if motorista_nome and delivery:
@@ -76,6 +85,9 @@ def extrair_dados_coleta(caminhos_imagens=None):
                         coleta['placa_reboque'] = bd_motoristas[motorista_nome].get('placa_reboque', '')
                         
                         dados_extraidos.append(coleta)
+                except Exception as e:
+                    print(f"[SCRAPER] Erro ao ler linha da tabela: {e}")
+                    continue
             
             browser.close()
             
