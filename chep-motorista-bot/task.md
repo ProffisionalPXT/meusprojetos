@@ -1,0 +1,7 @@
+- [ ] Atualizar `web/navegacao.py` para incluir a lógica de Cascata
+  - [ ] Iterar sobre coletas pendentes
+  - [ ] Identificar linhas de cascata (ID de Fornecimento vazio)
+  - [ ] Marcar checkbox da cascata e abrir painel de fornecimentos
+  - [ ] Ler subtabela e cruzar `ID do Fornecimento` com os pendentes
+  - [ ] Validar regra de origem para escolher qual motorista preencher na linha principal
+  - [ ] Preencher Nome, CPF e Placa na linha principal
