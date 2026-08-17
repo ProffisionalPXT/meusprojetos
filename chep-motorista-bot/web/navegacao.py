@@ -101,7 +101,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                             # ======== MAPEAMENTO DINÂMICO ========
                             col_map = {'nome': 3, 'cpf': 4, 'placa_cavalo': 5, 'placa_reboque': -1}
                             try:
-                                headers = await results_frame.locator('table.listTable thead th').all_text_contents()
+                                headers = await results_frame.locator('table.listTable').first.locator('thead th').all_text_contents()
                                 for i, h in enumerate(headers):
                                     h_clean = h.strip().lower()
                                     if 'do reboque' in h_clean and 'placa' not in h_clean:
@@ -125,9 +125,15 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                 termo_busca = d.get('id_delivery') if 'id_delivery' in d else d.get('busca')
                                 print(f"[WEB] Procurando por: {termo_busca}")
                                 
-                                # Busca APENAS nas linhas da tabela principal
-                                row = results_frame.locator('table.listTable').first.locator(f'> tbody > tr:has-text("{termo_busca}")').first
-                                if await row.count() > 0:
+                                # Busca APENAS nas linhas da tabela principal (que tem mais de 15 colunas)
+                                rows_match = await results_frame.locator(f'tr:has-text("{termo_busca}")').all()
+                                row = None
+                                for r in rows_match:
+                                    if await r.locator(':scope > td').count() >= 15:
+                                        row = r
+                                        break
+                                
+                                if row is not None:
                                     print(f"[WEB] -> Encontrou a linha para {termo_busca}! Verificando se já está preenchida...")
                                     
                                     # Auditoria completa
@@ -228,17 +234,17 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             except:
                                                 pass
                                                 
-                                        # Pega apenas as linhas da tabela principal (evitando sub-painéis)
-                                        linhas = await results_frame.locator('table.listTable').first.locator('> tbody > tr').all()
+                                        # Pega todas as linhas
+                                        linhas = await results_frame.locator('table.listTable tbody tr').all()
                                         
                                         for idx, row in enumerate(linhas):
                                             if not coletas_pendentes:
                                                 break # Todas foram resolvidas
                                             
                                             try:
-                                                # Evita Timeout em linhas ocultas ou sem as colunas necessárias
+                                                # Evita Timeout em linhas ocultas ou sub-painéis (que tem menos de 15 colunas)
                                                 col_count = await row.locator(':scope > td').count()
-                                                if col_count < 3:
+                                                if col_count < 15:
                                                     continue
                                                 
                                                 # Colunas: 1 (ID da carga), 2 (ID do fornecimento), 8 (Nome do local de origem)
