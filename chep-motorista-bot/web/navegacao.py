@@ -129,9 +129,21 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                 if await row.count() > 0:
                                     print(f"[WEB] -> Encontrou a linha para {termo_busca}! Verificando se já está preenchida...")
                                     
-                                    texto_motorista_atual = await row.locator(':scope > td').nth(col_map['nome']).inner_text(timeout=1000)
-                                    if texto_motorista_atual.strip():
-                                        print(f"[WEB] -> A coleta {termo_busca} já está preenchida com '{texto_motorista_atual.strip()}'. Pulando digitação...")
+                                    # Auditoria completa
+                                    precisa_preencher = False
+                                    campos_verificar = [('nome', col_map['nome']), ('cpf', col_map['cpf']), ('placa_cavalo', col_map['placa_cavalo'])]
+                                    if col_map['placa_reboque'] != -1:
+                                        campos_verificar.append(('placa_reboque', col_map['placa_reboque']))
+                                        
+                                    for chave, col_idx in campos_verificar:
+                                        if chave in d and d[chave]:
+                                            txt_atual = await row.locator(':scope > td').nth(col_idx).inner_text(timeout=1000)
+                                            if not txt_atual.strip():
+                                                precisa_preencher = True
+                                                break
+                                                
+                                    if not precisa_preencher:
+                                        print(f"[WEB] -> A coleta {termo_busca} já está preenchida com todos os dados. Pulando digitação...")
                                     else:
                                         # Coluna Nome do Motorista
                                         if 'nome' in d and d['nome']:
@@ -215,8 +227,8 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             except:
                                                 pass
                                                 
-                                        # Pega todas as linhas da tabela principal
-                                        linhas = await results_frame.locator('table.listTable tbody tr').all()
+                                        # Pega apenas as linhas da tabela principal (evitando sub-painéis)
+                                        linhas = await results_frame.locator('table.listTable').first.locator('> tbody > tr').all()
                                         
                                         for idx, row in enumerate(linhas):
                                             if not coletas_pendentes:
@@ -273,12 +285,6 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                     # 3. Analisa o sub-painel
                                                     resolvidos_nesta_cascata = []
                                                     houve_edicao_nesta_cascata = False
-                                                
-                                                    # Verifica se a linha pai JÁ está preenchida (por nós agora, ou por alguém antes)
-                                                    texto_motorista_pai = await row.locator(':scope > td').nth(col_map['nome']).inner_text(timeout=1000)
-                                                    linha_preenchida = bool(texto_motorista_pai.strip())
-                                                    if linha_preenchida:
-                                                        print(f"[WEB] -> A linha principal desta Cascata já está preenchida com '{texto_motorista_pai.strip()}'.")
                                                     
                                                     for pendente in coletas_pendentes:
                                                         termo_busca = pendente.get('id_delivery') or pendente.get('busca')
@@ -295,9 +301,21 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                         
                                                             if primeiro_nome_cliente and primeiro_nome_cliente in texto_linha_principal.upper():
                                                                 print(f"[WEB] -> Validação de Origem APROVADA ({primeiro_nome_cliente}).")
+                                                                
+                                                                precisa_preencher = False
+                                                                if not houve_edicao_nesta_cascata:
+                                                                    campos_verificar = [('nome', col_map['nome']), ('cpf', col_map['cpf']), ('placa_cavalo', col_map['placa_cavalo'])]
+                                                                    if col_map['placa_reboque'] != -1:
+                                                                        campos_verificar.append(('placa_reboque', col_map['placa_reboque']))
+                                                                    for chave, col_idx in campos_verificar:
+                                                                        if chave in pendente and pendente[chave]:
+                                                                            txt_atual = await row.locator(':scope > td').nth(col_idx).inner_text(timeout=1000)
+                                                                            if not txt_atual.strip():
+                                                                                precisa_preencher = True
+                                                                                break
                                                             
-                                                                # Só preenche a linha principal SE ainda não foi preenchida nesta cascata
-                                                                if not linha_preenchida:
+                                                                # Só preenche a linha principal SE precisar
+                                                                if precisa_preencher:
                                                                     print("[WEB] -> Preenchendo a linha principal do caminhão...")
                                                                     if 'nome' in pendente and pendente['nome']:
                                                                         cell_nome = row.locator(':scope > td').nth(col_map['nome'])
@@ -335,10 +353,9 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                                         await target_page.wait_for_timeout(50)
                                                                         await target_page.keyboard.press('Enter')
                                                                 
-                                                                    linha_preenchida = True
                                                                     houve_edicao_nesta_cascata = True
                                                                 else:
-                                                                    print("[WEB] -> A linha principal já foi preenchida para esta Carga. Pulando digitação dupla.")
+                                                                    print("[WEB] -> A linha principal já tem todos os dados para esta Carga. Pulando digitação.")
                                                             
                                                                 resolvidos_nesta_cascata.append(pendente)
                                                                 await target_page.wait_for_timeout(1500)
