@@ -125,13 +125,17 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                 termo_busca = d.get('id_delivery') if 'id_delivery' in d else d.get('busca')
                                 print(f"[WEB] Procurando por: {termo_busca}")
                                 
-                                # Busca APENAS nas linhas da tabela principal (que tem mais de 15 colunas)
+                                # Busca APENAS nas linhas da tabela principal (ID da Carga começa com 4)
                                 rows_match = await results_frame.locator(f'tr:has-text("{termo_busca}")').all()
                                 row = None
                                 for r in rows_match:
-                                    if await r.locator(':scope > td').count() >= 15:
-                                        row = r
-                                        break
+                                    try:
+                                        col1_text = await r.locator(':scope > td').nth(1).inner_text(timeout=500)
+                                        if col1_text.strip().startswith('4'):
+                                            row = r
+                                            break
+                                    except:
+                                        pass
                                 
                                 if row is not None:
                                     print(f"[WEB] -> Encontrou a linha para {termo_busca}! Verificando se já está preenchida...")
@@ -242,13 +246,14 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                 break # Todas foram resolvidas
                                             
                                             try:
-                                                # Evita Timeout em linhas ocultas ou sub-painéis (que tem menos de 15 colunas)
-                                                col_count = await row.locator(':scope > td').count()
-                                                if col_count < 15:
-                                                    continue
-                                                
-                                                # Colunas: 1 (ID da carga), 2 (ID do fornecimento), 8 (Nome do local de origem)
+                                                # Colunas: 1 (ID da carga), 2 (ID do fornecimento)
                                                 id_carga = await row.locator(':scope > td').nth(1).inner_text(timeout=1000)
+                                                id_carga = id_carga.strip()
+                                                
+                                                # Ignora linhas de sub-painéis (IDs de Fornecimento começam com 3)
+                                                if not id_carga.startswith('4'):
+                                                    continue
+                                                    
                                                 id_fornecimento = await row.locator(':scope > td').nth(2).inner_text(timeout=1000)
                                                 texto_linha_principal = await row.inner_text(timeout=1000)
                                             
