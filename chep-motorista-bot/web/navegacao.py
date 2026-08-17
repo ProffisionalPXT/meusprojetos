@@ -110,7 +110,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                         col_map['cpf'] = i
                                     elif 'ativo' in h_clean or 'cavalo' in h_clean:
                                         col_map['placa_cavalo'] = i
-                                    elif 'placa do reboque' in h_clean or 'número(s) da placa' in h_clean:
+                                    elif 'placa do reboque' in h_clean or 'da placa' in h_clean:
                                         col_map['placa_reboque'] = i
                                 print(f"[WEB] Mapa de colunas dinâmico: {col_map}")
                             except Exception as e:
@@ -201,6 +201,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                             # ==========================================
                             if coletas_pendentes:
                                 print(f"[WEB] Iniciando busca avançada (Cascata) para coletas pendentes...")
+                                cascatas_processadas = set()
                                 
                                 while coletas_pendentes:
                                     reiniciar_cascata = False
@@ -233,10 +234,15 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                 texto_linha_principal = await row.inner_text(timeout=1000)
                                             
                                                 id_carga = id_carga.strip()
+                                                
+                                                if id_carga in cascatas_processadas:
+                                                    continue
+                                                    
                                                 id_fornecimento = id_fornecimento.strip()
                                             
                                                 # Se tem ID da carga mas NÃO tem ID do fornecimento, é uma Cascata!
                                                 if id_carga and not id_fornecimento:
+                                                    cascatas_processadas.add(id_carga)
                                                     print(f"[WEB] Analisando Cascata (Carga: {id_carga})...")
                                                 
                                                     # 1. Marca a caixinha (coluna 0)

@@ -23,9 +23,6 @@ def colar_imagem(event=None):
         messagebox.showerror("Erro", f"Erro ao colar a imagem: {str(e)}")
 
 def iniciar_automacao():
-    if not imagens_coladas:
-        messagebox.showwarning("Aviso", "Nenhuma imagem na fila para processar!")
-        return
         
     if not os.path.exists(INPUT_DIR):
         os.makedirs(INPUT_DIR)
@@ -42,9 +39,8 @@ def iniciar_automacao():
     with open(os.path.join(INPUT_DIR, "processar.go"), "w") as f:
         f.write("go")
         
-    lbl_status.config(text=f"🚀 Lote de {len(imagens_coladas)} imagem(ns) enviado!\nO robô está trabalhando na tela de trás...", fg="#00a8ff")
+    lbl_status.config(text=f"🚀 Automação enviada!\nO robô está trabalhando na tela de trás...", fg="#00a8ff")
     imagens_coladas.clear()
-    btn_iniciar.config(state=tk.DISABLED)
 
 # Configuração da Janela Principal
 root = tk.Tk()
@@ -57,8 +53,7 @@ root.attributes("-topmost", True)
 lbl_title = tk.Label(root, text="📥 Central de Lotes do CHEP", font=("Arial", 16, "bold"), bg="#2b2b2b", fg="#00a8ff")
 lbl_title.pack(pady=15)
 
-# Instruções
-lbl_inst = tk.Label(root, text="1. Tire um print da tela (PrintScreen ou Win+Shift+S).\n2. Clique no botão verde 'Colar Imagem' abaixo.\n3. Repita o processo até ter todas as telas.\n4. Clique em INICIAR AUTOMAÇÃO.", font=("Arial", 11), bg="#2b2b2b", fg="white")
+lbl_inst = tk.Label(root, text="Clique em INICIAR AUTOMAÇÃO para o robô ler o site.\n(Se quiser, ainda pode colar prints como antes)", font=("Arial", 11), bg="#2b2b2b", fg="white")
 lbl_inst.pack(pady=10)
 
 # Frame dos Botões
@@ -72,11 +67,10 @@ btn_colar.grid(row=0, column=0, padx=10)
 
 btn_iniciar = tk.Button(frame_botoes, text="▶ INICIAR AUTOMAÇÃO", font=("Arial", 12, "bold"), bg="#ff5722", fg="white", 
                       activebackground="#e64a19", activeforeground="white", relief=tk.FLAT, 
-                      padx=10, pady=5, command=iniciar_automacao, state=tk.DISABLED)
+                      padx=10, pady=5, command=iniciar_automacao, state=tk.NORMAL)
 btn_iniciar.grid(row=0, column=1, padx=10)
 
-# Status
-lbl_status = tk.Label(root, text="Aguardando primeira imagem...", font=("Arial", 11, "bold"), bg="#2b2b2b", fg="gray")
+lbl_status = tk.Label(root, text="Aguardando iniciar...", font=("Arial", 11, "bold"), bg="#2b2b2b", fg="gray")
 lbl_status.pack(side=tk.BOTTOM, pady=15)
 
 # Atalho global na janela
