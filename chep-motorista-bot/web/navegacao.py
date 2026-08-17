@@ -6,7 +6,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
     
     async with async_playwright() as p:
         print(f"[WEB] Iniciando Playwright para o perfil {login_user}...")
-        browser = await p.chromium.launch(headless=False, slow_mo=500)
+        browser = await p.chromium.launch(headless=False, slow_mo=50)
         context = await browser.new_context(viewport={'width': 1366, 'height': 768})
         page = await context.new_page()
 
@@ -110,7 +110,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                         col_map['cpf'] = i
                                     elif 'ativo' in h_clean or 'cavalo' in h_clean:
                                         col_map['placa_cavalo'] = i
-                                    elif 'placa do reboque' in h_clean:
+                                    elif 'placa do reboque' in h_clean or 'número(s) da placa' in h_clean:
                                         col_map['placa_reboque'] = i
                                 print(f"[WEB] Mapa de colunas dinâmico: {col_map}")
                             except Exception as e:
@@ -138,9 +138,9 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             cell_nome = row.locator(':scope > td').nth(col_map['nome'])
                                             await cell_nome.scroll_into_view_if_needed()
                                             await cell_nome.dblclick()
-                                            await target_page.wait_for_timeout(300)
+                                            await target_page.wait_for_timeout(100)
                                             await target_page.keyboard.type(d['nome'])
-                                            await target_page.wait_for_timeout(200)
+                                            await target_page.wait_for_timeout(50)
                                             await target_page.keyboard.press('Enter')
                                         
                                         # Coluna CPF
@@ -148,9 +148,9 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             cell_cpf = row.locator(':scope > td').nth(col_map['cpf'])
                                             await cell_cpf.scroll_into_view_if_needed()
                                             await cell_cpf.dblclick()
-                                            await target_page.wait_for_timeout(300)
+                                            await target_page.wait_for_timeout(100)
                                             await target_page.keyboard.type(d['cpf'])
-                                            await target_page.wait_for_timeout(200)
+                                            await target_page.wait_for_timeout(50)
                                             await target_page.keyboard.press('Enter')
                                             
                                         # Coluna Placa Cavalo
@@ -158,9 +158,9 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             cell_placa = row.locator(':scope > td').nth(col_map['placa_cavalo'])
                                             await cell_placa.scroll_into_view_if_needed()
                                             await cell_placa.dblclick()
-                                            await target_page.wait_for_timeout(300)
+                                            await target_page.wait_for_timeout(100)
                                             await target_page.keyboard.type(d['placa_cavalo'])
-                                            await target_page.wait_for_timeout(200)
+                                            await target_page.wait_for_timeout(50)
                                             await target_page.keyboard.press('Enter')
                                             
                                         # Coluna Placa Reboque
@@ -168,9 +168,9 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                             cell_reboque = row.locator(':scope > td').nth(col_map['placa_reboque'])
                                             await cell_reboque.scroll_into_view_if_needed()
                                             await cell_reboque.dblclick()
-                                            await target_page.wait_for_timeout(300)
+                                            await target_page.wait_for_timeout(100)
                                             await target_page.keyboard.type(d['placa_reboque'])
-                                            await target_page.wait_for_timeout(200)
+                                            await target_page.wait_for_timeout(50)
                                             await target_page.keyboard.press('Enter')
                                             
                                         print(f"[WEB] -> Sucesso! Dados preenchidos para {termo_busca}.")
@@ -297,36 +297,36 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                                         cell_nome = row.locator(':scope > td').nth(col_map['nome'])
                                                                         await cell_nome.scroll_into_view_if_needed()
                                                                         await cell_nome.dblclick()
-                                                                        await target_page.wait_for_timeout(300)
+                                                                        await target_page.wait_for_timeout(100)
                                                                         await target_page.keyboard.type(pendente['nome'])
-                                                                        await target_page.wait_for_timeout(200)
+                                                                        await target_page.wait_for_timeout(50)
                                                                         await target_page.keyboard.press('Enter')
                                                                 
                                                                     if 'cpf' in pendente and pendente['cpf']:
                                                                         cell_cpf = row.locator(':scope > td').nth(col_map['cpf'])
                                                                         await cell_cpf.scroll_into_view_if_needed()
                                                                         await cell_cpf.dblclick()
-                                                                        await target_page.wait_for_timeout(300)
+                                                                        await target_page.wait_for_timeout(100)
                                                                         await target_page.keyboard.type(pendente['cpf'])
-                                                                        await target_page.wait_for_timeout(200)
+                                                                        await target_page.wait_for_timeout(50)
                                                                         await target_page.keyboard.press('Enter')
                                                                     
                                                                     if 'placa_cavalo' in pendente and pendente['placa_cavalo']:
                                                                         cell_placa = row.locator(':scope > td').nth(col_map['placa_cavalo'])
                                                                         await cell_placa.scroll_into_view_if_needed()
                                                                         await cell_placa.dblclick()
-                                                                        await target_page.wait_for_timeout(300)
+                                                                        await target_page.wait_for_timeout(100)
                                                                         await target_page.keyboard.type(pendente['placa_cavalo'])
-                                                                        await target_page.wait_for_timeout(200)
+                                                                        await target_page.wait_for_timeout(50)
                                                                         await target_page.keyboard.press('Enter')
                                                                     
                                                                     if 'placa_reboque' in pendente and pendente['placa_reboque'] and col_map['placa_reboque'] != -1:
                                                                         cell_reboque = row.locator(':scope > td').nth(col_map['placa_reboque'])
                                                                         await cell_reboque.scroll_into_view_if_needed()
                                                                         await cell_reboque.dblclick()
-                                                                        await target_page.wait_for_timeout(300)
+                                                                        await target_page.wait_for_timeout(100)
                                                                         await target_page.keyboard.type(pendente['placa_reboque'])
-                                                                        await target_page.wait_for_timeout(200)
+                                                                        await target_page.wait_for_timeout(50)
                                                                         await target_page.keyboard.press('Enter')
                                                                 
                                                                     linha_preenchida = True
