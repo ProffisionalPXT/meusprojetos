@@ -284,7 +284,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                                         termo_busca = pendente.get('id_delivery') or pendente.get('busca')
                                                     
                                                         # Verifica se o ID está visível em algum lugar da tela (no sub-painel)
-                                                        if await target_page.locator(f'text="{termo_busca}"').count() > 0:
+                                                        if await results_frame.locator(f'text="{termo_busca}"').count() > 0:
                                                             print(f"[WEB] -> Cascata MATCH! O ID {termo_busca} está dentro da carga {id_carga}.")
                                                         
                                                             # REGRA DE OURO: Verifica se o Cliente bate com a Origem da Linha Principal
