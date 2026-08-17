@@ -325,10 +325,17 @@ class CHEPBotEngine:
                 await asyncio.sleep(1)
 
         # 2. Se a página atual for a HOME (/home), acessa a 'Gestão de carga'
-        if "home" in page.url or await page.locator("div:has-text('Gestão de carga')").first.is_visible(timeout=2000):
+        card_gestao = page.locator(".cardWidget-header").filter(has_text="Gestão de carga").first
+        is_home_url = "home" in page.url
+        is_card_visible = False
+        try:
+            is_card_visible = await card_gestao.is_visible(timeout=2000)
+        except:
+            pass
+
+        if is_home_url or is_card_visible:
             self.log("🏠 Posição atual: Tela HOME. Acessando 'Gestão de carga'...")
-            card_gestao = page.locator("div:has-text('Gestão de carga'), a:has-text('Gestão de carga'), .cardWidget-header").first
-            if await card_gestao.is_visible(timeout=3000):
+            if is_card_visible:
                 await card_gestao.click()
                 await asyncio.sleep(2.5)
                 await self.save_debug_screenshot(page, "debug_03_gestao_carga", "Print 3 - Gestão de Carga")
@@ -373,7 +380,7 @@ class CHEPBotEngine:
         try:
             self.log(f"\n🔐 [Passo 1/2] Verificando Autenticação e Gestão de Carga para a conta {profile_name}...")
             
-            if "cmaweb.chep.com" not in page.url or "bluechat" in page.url:
+            if "cmaweb.chep.com" not in page.url:
                 await page.goto("https://cmaweb.chep.com/", wait_until="domcontentloaded", timeout=60000)
                 await asyncio.sleep(1.5)
 
