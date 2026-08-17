@@ -101,7 +101,7 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                             # ======== MAPEAMENTO DINÂMICO ========
                             col_map = {'nome': 3, 'cpf': 4, 'placa_cavalo': 5, 'placa_reboque': -1}
                             try:
-                                headers = await results_frame.locator('table.listTable thead th').all_inner_texts()
+                                headers = await results_frame.locator('table.listTable thead th').all_text_contents()
                                 for i, h in enumerate(headers):
                                     h_clean = h.strip().lower()
                                     if 'do reboque' in h_clean and 'placa' not in h_clean:
@@ -125,7 +125,8 @@ async def executar_preenchimento_async(dados_extraidos, login_user, login_pass):
                                 termo_busca = d.get('id_delivery') if 'id_delivery' in d else d.get('busca')
                                 print(f"[WEB] Procurando por: {termo_busca}")
                                 
-                                row = results_frame.locator(f'tr:has-text("{termo_busca}")').first
+                                # Busca APENAS nas linhas da tabela principal
+                                row = results_frame.locator('table.listTable').first.locator(f'> tbody > tr:has-text("{termo_busca}")').first
                                 if await row.count() > 0:
                                     print(f"[WEB] -> Encontrou a linha para {termo_busca}! Verificando se já está preenchida...")
                                     
