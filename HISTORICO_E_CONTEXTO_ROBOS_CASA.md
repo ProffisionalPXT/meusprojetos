@@ -1,3 +1,66 @@
+# 🚨 LEIA-ME PRIMEIRO: GUIA RÁPIDO PARA O PC DE CASA
+
+Bem-vindo! Este repositório contém os códigos-fonte atualizados, configurações e histórico completo dos nossos 3 robôs de automação:
+1. **🤖 Robô GW** (`/gw-motorista-bot`): Cadastro de Motoristas, Veículos e Proprietários no GW com OCR inteligente.
+2. **🤖 Robô de Programação CHEP** (`/chep-motorista-bot`): Alocação de coletas e remessas no JDA SmartBench CHEP com lógica de cascata.
+3. **🤖 Robô de Ocorrências CHEP** (`/chep_occurrence_bot`): Monitoramento e abertura automática de chamados de ocorrência no portal CMA Service Desk.
+
+---
+
+## ⚡ Passo a Passo Rápido para Usar no PC de Casa
+
+### 1️⃣ Como Clonar no PC de Casa
+Abra o terminal PowerShell ou Prompt de Comando na pasta onde quer salvar os projetos e rode:
+```bash
+git clone https://github.com/ProffisionalPXT/meusprojetos.git
+```
+
+### 2️⃣ Como Abrir no VS Code / Antigravity
+Abra a pasta clonada `meusprojetos` no seu editor ou no **Antigravity**.
+
+### 3️⃣ Prompt Mágico para Copiar e Colar na IA de Casa
+Assim que abrir o chat da IA no seu PC de casa, **copie e cole o texto abaixo**:
+
+```text
+Olá! Estou continuando o desenvolvimento que fiz no computador do escritório.
+Por favor, leia atentamente o arquivo "HISTORICO_E_CONTEXTO_ROBOS_CASA.md" e o "README.md" que estão na raiz deste projeto.
+
+Nele você tem todo o dossiê completo dos nossos 3 robôs:
+1. Robô GW (gw-motorista-bot)
+2. Robô de Programação CHEP (chep-motorista-bot)
+3. Robô de Ocorrências CHEP (chep_occurrence_bot)
+
+Com todos os prompts que já utilizei, regras de negócio, lógica de cascata, OCR, cadastro atualizado de motoristas e contas configuradas.
+Regras de ouro:
+- Apresente um plano de especialista antes de alterar qualquer arquivo.
+- Aguarde meu comando explícito ("faça", "execute", "prossiga") antes de fazer alterações.
+- Mantenha a integridade do código sem modificar arquivos desnecessários.
+
+Pode confirmar que leu os arquivos e me dizer como estamos organizados?
+```
+
+---
+
+## 🔑 Quadro de Contas e Credenciais dos Projetos
+
+| Projeto | Sistema / Plataforma | Contas / Usuários | Senha / Configurações |
+| :--- | :--- | :--- | :--- |
+| **🤖 Robô GW** | GW Transportes (`gw.gwsistemas.com.br`) | `juvenalcorreia@transraplogistica.com.br` | Org: `PURM` / Senha: `Nazinho1975@` |
+| **🤖 Robô Ocorrências** | Portal CHEP CMA (`jdadelivers.com`) | • **PURM2**: `gabrielpeixoto@purm2.com.br`<br>• **PURM3**: `gabrielpeixoto@purm3.com.br` | Senha: `12345`<br>Perfis: `BR__LH_PURM2` e `BR__LH_PURM3` |
+| **🤖 Robô Programação** | JDA SmartBench + Painel Operacional | Painel `controleechep.onrender.com` / `137.131.190.170` | Vercel / GitHub |
+| **🐙 GitHub Geral** | GitHub (`ProffisionalPXT`) | `https://github.com/ProffisionalPXT/meusprojetos.git` | Repositório central dos 3 robôs |
+| **🐙 GitHub Ocorrências** | GitHub (`ProffisionalPXT`) | `https://github.com/ProffisionalPXT/ocorrenciaschep.git` | Repositório do Robô de Ocorrências |
+| **🐙 GitHub Controle** | GitHub (`bielpxt98`) | `https://github.com/bielpxt98/Controle-Operacional-.git` | Repositório do Painel Web |
+
+---
+
+## 📚 Dossiê Completo
+Para ver todo o histórico detalhado, arquivos, arquitetura e mais de 200 prompts reais feitos durante o desenvolvimento, abra o arquivo:
+📄 **[HISTORICO_E_CONTEXTO_ROBOS_CASA.md](HISTORICO_E_CONTEXTO_ROBOS_CASA.md)**
+
+
+================================================================================
+
 # 📦 DOSSIÊ COMPLETO E HISTÓRICO DE ATUALIZAÇÃO DOS ROBÔS (PC DE CASA)
 
 Este documento foi gerado automaticamente para você levar ao seu computador de casa (via Pendrive, Google Drive, WhatsApp ou Git) para que a inteligência artificial da sua casa fique **100% atualizada** com tudo o que foi desenvolvido, corrigido e configurado em cada um dos 3 robôs.
@@ -391,72 +454,138 @@ The current local time is: 2026-08-13T09:44:47-03:00.
 The current local time is: 2026-08-13T09:53:10-03:00.
 </ADDITIONAL_METADATA>"
 
-> **Prompt 8:** "sim, agora vou mostrar como preencher os dados Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: ARGEMIRO BORGES
-CPF: 041.604.865-09
-PLACA: PEG7666 / DTD8506
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: VALDEMIR DE JESUS
-CPF: 044.327.095-37
-PLACA: HWB9F22
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: JONES ROSARIO
-CPF: 533.594.654.00
-PLACA: JHX3C33 / KKT9007
-
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: GABRIEL BORGES
-CPF: 809.066.155-87
-PLACA: KJY3204 / KGG1152
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: LUIS CARLOS
-CPF: 934.560.345-04
-PLACA: KLB5018 / NKZ6545
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: WILSON REIS
-CPF: 806.984.765-49
-PLACA: JJF1856 / NVQ8447
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: FABIO SOUZA
-CPF: 007.714.335-30
-PLACA: PEJ4695 / NLB7814
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: JEAN ROBSON
-CPF: 032.795.865-00
-PLACA: HWB9F22
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: ARIEL NASCIMENTO
-CPF: 050.153.565-95
-PLACA: JVL8A44
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: LEANDRO DE ANDRADE
-CPF: 017.793.835.84
+> **Prompt 8:** "sim, agora vou mostrar como preencher os dados Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: ARGEMIRO BORGES
+
+CPF: 041.604.865-09
+
+PLACA: PEG7666 / DTD8506
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: VALDEMIR DE JESUS
+
+CPF: 044.327.095-37
+
+PLACA: HWB9F22
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: JONES ROSARIO
+
+CPF: 533.594.654.00
+
+PLACA: JHX3C33 / KKT9007
+
+
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: GABRIEL BORGES
+
+CPF: 809.066.155-87
+
+PLACA: KJY3204 / KGG1152
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: LUIS CARLOS
+
+CPF: 934.560.345-04
+
+PLACA: KLB5018 / NKZ6545
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: WILSON REIS
+
+CPF: 806.984.765-49
+
+PLACA: JJF1856 / NVQ8447
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: FABIO SOUZA
+
+CPF: 007.714.335-30
+
+PLACA: PEJ4695 / NLB7814
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: JEAN ROBSON
+
+CPF: 032.795.865-00
+
+PLACA: HWB9F22
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: ARIEL NASCIMENTO
+
+CPF: 050.153.565-95
+
+PLACA: JVL8A44
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: LEANDRO DE ANDRADE
+
+CPF: 017.793.835.84
+
 PLACA: NZP7012
 
 <ADDITIONAL_METADATA>
@@ -547,72 +676,138 @@ The current local time is: 2026-08-13T13:02:22-03:00.
 The current local time is: 2026-08-13T13:07:58-03:00.
 </ADDITIONAL_METADATA>"
 
-> **Prompt 23:** "Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: ARGEMIRO BORGES
-CPF: 041.604.865-09
-PLACA: PEG7666 / DTD8506
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: VALDEMIR DE JESUS
-CPF: 044.327.095-37
-PLACA: HWB9F22
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: JONES ROSARIO
-CPF: 533.594.654.00
-PLACA: JHX3C33 / KKT9007
-
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: GABRIEL BORGES
-CPF: 809.066.155-87
-PLACA: KJY3204 / KGG1152
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: LUIS CARLOS
-CPF: 934.560.345-04
-PLACA: KLB5018 / NKZ6545
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: WILSON REIS
-CPF: 806.984.765-49
-PLACA: JJF1856 / NVQ8447
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: FABIO SOUZA
-CPF: 007.714.335-30
-PLACA: PEJ4695 / NLB7814
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: JEAN ROBSON
-CPF: 032.795.865-00
-PLACA: HWB9F22
-
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: ARIEL NASCIMENTO
-CPF: 050.153.565-95
-PLACA: JVL8A44
-
-Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
-
-NOME: LEANDRO DE ANDRADE
-CPF: 017.793.835.84
+> **Prompt 23:** "Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: ARGEMIRO BORGES
+
+CPF: 041.604.865-09
+
+PLACA: PEG7666 / DTD8506
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: VALDEMIR DE JESUS
+
+CPF: 044.327.095-37
+
+PLACA: HWB9F22
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: JONES ROSARIO
+
+CPF: 533.594.654.00
+
+PLACA: JHX3C33 / KKT9007
+
+
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: GABRIEL BORGES
+
+CPF: 809.066.155-87
+
+PLACA: KJY3204 / KGG1152
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: LUIS CARLOS
+
+CPF: 934.560.345-04
+
+PLACA: KLB5018 / NKZ6545
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: WILSON REIS
+
+CPF: 806.984.765-49
+
+PLACA: JJF1856 / NVQ8447
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: FABIO SOUZA
+
+CPF: 007.714.335-30
+
+PLACA: PEJ4695 / NLB7814
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: JEAN ROBSON
+
+CPF: 032.795.865-00
+
+PLACA: HWB9F22
+
+
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: ARIEL NASCIMENTO
+
+CPF: 050.153.565-95
+
+PLACA: JVL8A44
+
+
+
+Segue abaixo dados do veiculo e motorista que irá realizar a coleta.
+
+
+
+NOME: LEANDRO DE ANDRADE
+
+CPF: 017.793.835.84
+
 PLACA: NZP7012 OS DADOS DE TODOS OS MOTORISTA MEUS
 
 <ADDITIONAL_METADATA>
@@ -662,47 +857,86 @@ Monitorar em tempo real as coletas pendentes e abrir chamados automáticos de oc
 
 ### 💬 Histórico de Prompts Reais do Usuário (Ocorrências Bot)
 
-> **Prompt 1:** "calma, voce ainda não entendeu, existem varios assais, e tambem tem outros, exemnplo cliente NORSA, na programação vai sair como COCA COLA. cliente wms max atacado cabula. WMS SUPERMERCADOS DO BRASIL LTDA., sempre sai com a razao social, e eu tenho que descobrir. 
-
-•	Avenida Luis Viana ( Paralela )
-•	Avenida Afrânio Peixoto ( Paripe ou Lobato) 
-•	Avenida Mario Leal ( Bonocô )
-•	Rua Silveira Martins ( Cabula ) 
-•	Avenida Maria Lúcia ( Barradão )
-•	Rua Castro Valente ( Canabrava ) 
-•	Avenida Barros Reis ( Barros Reis ) 
-•	Rua do Salete ( Salete ) 
-•	Avenida Santiago de Compostela ( Iguatemi ) 
-•	Rua Genaro de Carvalho ( Baixa de quinta ) 
-•	Rua Vereador Zezeu ( Cajazeiras ) 
-•	Rua Elias Nazaré ( Calçada ) 
-•	Avenida Caminho de Areia ( Caminho de areia ) 
-•	Avenida Eng Walter Aragão ( Simoes Filho ) 
-•	Avenida Gen. San Martin ( mesmo nome ) 
-•	Rua Nilo Picanha ( Mesmo nome ) 
-•	Avenida Jequitaia ( Calçada ) 
-•	Lagoa branca ( Camaçari ou estrada do coco ) 
-•	Rua Oito de novembro ( Pirajá ) 
-•	Estrada de campinas ( São Caetano ) 
-•	Rua Ismar araujo ( Pau de lima ) 
-•	Camaçari rod do coco (Itacimirim ) 
-•	Rua Pastor José Guilherme ( é chamado pau de lima quando for WMSMAX ) 
-•	Avenida Cardeal Avelar Brandão ( Mata escura ) 
-•	Av antonio Carlos Magalhaes ( AGM , rotula do abacaxi ) 
-•	Rua Frederico Costa (Periperi) 
-•	Rua Luis regis Pacheco ( Uruguai )
-•	Rua Janio quadros ( Amarelina ) 
-•	Rua Coqueiro grande ( Cajazeiras ) 
-•	Av Tancredo neves ( Pernambuês )
-•	Av Vasco da Gama ( mesmo nome ) 
-•	Av Octavio Mangabeira ( Piatã )
-•	Av. São Cristovão ( mesmo nome ) 
-•	Rua Prof Plinio Garcez ( Mussuranga ) 
-•	Av. V bronze ( Paripe ) 
-•	Avenida General Graça lessa ( Ogujá ) 
+> **Prompt 1:** "calma, voce ainda não entendeu, existem varios assais, e tambem tem outros, exemnplo cliente NORSA, na programação vai sair como COCA COLA. cliente wms max atacado cabula. WMS SUPERMERCADOS DO BRASIL LTDA., sempre sai com a razao social, e eu tenho que descobrir. 
+
+
+
+•	Avenida Luis Viana ( Paralela )
+
+•	Avenida Afrânio Peixoto ( Paripe ou Lobato) 
+
+•	Avenida Mario Leal ( Bonocô )
+
+•	Rua Silveira Martins ( Cabula ) 
+
+•	Avenida Maria Lúcia ( Barradão )
+
+•	Rua Castro Valente ( Canabrava ) 
+
+•	Avenida Barros Reis ( Barros Reis ) 
+
+•	Rua do Salete ( Salete ) 
+
+•	Avenida Santiago de Compostela ( Iguatemi ) 
+
+•	Rua Genaro de Carvalho ( Baixa de quinta ) 
+
+•	Rua Vereador Zezeu ( Cajazeiras ) 
+
+•	Rua Elias Nazaré ( Calçada ) 
+
+•	Avenida Caminho de Areia ( Caminho de areia ) 
+
+•	Avenida Eng Walter Aragão ( Simoes Filho ) 
+
+•	Avenida Gen. San Martin ( mesmo nome ) 
+
+•	Rua Nilo Picanha ( Mesmo nome ) 
+
+•	Avenida Jequitaia ( Calçada ) 
+
+•	Lagoa branca ( Camaçari ou estrada do coco ) 
+
+•	Rua Oito de novembro ( Pirajá ) 
+
+•	Estrada de campinas ( São Caetano ) 
+
+•	Rua Ismar araujo ( Pau de lima ) 
+
+•	Camaçari rod do coco (Itacimirim ) 
+
+•	Rua Pastor José Guilherme ( é chamado pau de lima quando for WMSMAX ) 
+
+•	Avenida Cardeal Avelar Brandão ( Mata escura ) 
+
+•	Av antonio Carlos Magalhaes ( AGM , rotula do abacaxi ) 
+
+•	Rua Frederico Costa (Periperi) 
+
+•	Rua Luis regis Pacheco ( Uruguai )
+
+•	Rua Janio quadros ( Amarelina ) 
+
+•	Rua Coqueiro grande ( Cajazeiras ) 
+
+•	Av Tancredo neves ( Pernambuês )
+
+•	Av Vasco da Gama ( mesmo nome ) 
+
+•	Av Octavio Mangabeira ( Piatã )
+
+•	Av. São Cristovão ( mesmo nome ) 
+
+•	Rua Prof Plinio Garcez ( Mussuranga ) 
+
+•	Av. V bronze ( Paripe ) 
+
+•	Avenida General Graça lessa ( Ogujá ) 
+
 •	Av estradas das barreiras  
 
-eu tenho essa lista aqui, mas nao sei se ela ta usada. mas mostra alumas que estão correto para meio que identificar wms ou sendas. 
+eu tenho essa lista aqui, mas nao sei se ela ta usada. mas mostra alumas que estão correto para meio que identificar wms ou sendas. 
+
 
 
 <ADDITIONAL_METADATA>
