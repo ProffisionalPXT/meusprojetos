@@ -18,6 +18,7 @@ EXTENSOES_FOTO = {
     ".bmp",
     ".heic",
     ".heif",
+    ".txt",
 }
 
 

@@ -2206,9 +2206,14 @@ def _extrair_cidade_uf_crlv(t: str) -> Optional[tuple]:
 def _normalizar_cidade_crlv(cid: str) -> str:
     """Tira label LOCAL/CIDADE grudado e lixo de pontuação."""
     s = _limpa_nome(cid or "")
-    # "LOCAL BARRA DOS COQUEIROS" / "CIDADE PAULISTA"
+    try:
+        from utils.cidades_brasil import limpar_prefixo_cidade
+        s = limpar_prefixo_cidade(s)
+    except Exception:
+        pass
+    # "LOCAL BARRA DOS COQUEIROS" / "CIDADE PAULISTA" / "REA TRES CACHOEIRAS"
     s = re.sub(
-        r"^(?:LOCAL|CIDADE|MUNIC[IÍ]PIO|MUNICIPIO|AKK|AK|OAR|OEA|OER)\s+",
+        r"^(?:LOCAL|CIDADE|MUNIC[IÍ]PIO|MUNICIPIO|MUNIC|MUN|UF|ÁREA|AREA|REA|AKK|AK|OAR|OEA|OER|EEA|SECRETARIA|DETRAN)\s+",
         "",
         s,
         flags=re.I,
@@ -2247,6 +2252,17 @@ def _cidade_parece_lixo(cid: str) -> bool:
     cu = (cid or "").upper().strip()
     if not cu:
         return True
+
+    # 1. Validação imediata contra a base oficial de municípios do IBGE
+    try:
+        from utils.cidades_brasil import eh_cidade_valida_brasil, limpar_prefixo_cidade
+        cu_limpa = limpar_prefixo_cidade(cu)
+        if not eh_cidade_valida_brasil(cu_limpa):
+            return True
+        cu = cu_limpa
+    except Exception:
+        pass
+
     # tira prefixo de label se ainda restar
     cu = re.sub(r"^(?:LOCAL|CIDADE|MUNIC[IÍ]PIO)\s+", "", cu).strip()
     if not cu:
@@ -2281,6 +2297,12 @@ def _cidade_parece_lixo(cid: str) -> bool:
             "MARCA MODELO", "TIPO VEICULO", "ESPECIE", "COMBUSTIVEL",
             "NUMERO DO CRV", "NUMERO CRV", "NÚMERO CRV", "CRV",
             "REGISTRO", "SEGURANÇA", "SEGURANCA", "VALOR TOTAL", "VALOR",
+            # termos de CRLV / tabela que o OCR confunde com cidade
+            "ALUGUEL", "RENAVAM", "CODIGO", "CÓDIGO", "PARTICULAR",
+            "CATEGORIA", "CAPACIDADE", "CHASSI", "PLACA", "ESPECIE", "ESPÉCIE",
+            "COMBUSTIVEL", "COMBUSTÍVEL", "POTENCIA", "POTÊNCIA",
+            "EXERCICIO", "EXERCÍCIO", "VIA", "DUT", "REBOQUE", "CARRETA",
+            "CAMINHAO", "CAMINHÃO", "CAVALO", "TRATOR", "IPVA", "TAXA", "TRIBUTO",
         )
     ):
         return True
@@ -2378,6 +2400,8 @@ def _limpar_nome_proprietario_final(nome: str) -> str:
         s,
         flags=re.I,
     ).strip()
+    # remove prefixos de senhor / abreviação de semi-reboque colados (ex: "SIR JAIRO...", "SR JAIRO...")
+    s = re.sub(r"^(?:SIR|SR[\.\/]?)\s+", "", s, flags=re.I).strip()
     s = re.split(
         r"\bCADASTRADO\s*DESDE\b|\bCNPJ\b|\bCPF\s*/?\s*CNPJ\b|\bCATEGORIA\b",
         s,

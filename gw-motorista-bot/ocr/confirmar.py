@@ -51,10 +51,30 @@ def confirmar_dados_caso(dados: DadosCaso) -> Optional[DadosCaso]:
         _salvar_snapshot(dados, pasta="para_confirmar")
         return dados
 
+    # Se ainda não tiver telefone celular, pergunta no terminal com opção de colar ou dar ENTER para pular
+    if not (dados.motorista.telefone_celular or "").strip():
+        try:
+            print("\n" + "─" * 60)
+            print(" 📱 TELEFONE / CELULAR DO MOTORISTA")
+            print("    Cole o número (ex: 62 9 8188 0128) ou aperte ENTER para deixar vazio")
+            print("─" * 60)
+            tel_digitado = input("  Telefone Celular: ").strip()
+            if tel_digitado:
+                # Limpa e extrai dígitos
+                digs = "".join(c for c in tel_digitado if c.isdigit())
+                if digs.startswith("55") and len(digs) in (12, 13):
+                    digs = digs[2:]
+                dados.motorista.telefone_celular = digs or tel_digitado
+                print(f"  [OK] Telefone celular registrado: {dados.motorista.telefone_celular}")
+            else:
+                print("  (Deixado vazio - você pode preencher no sistema ou via tabela)")
+        except (EOFError, KeyboardInterrupt):
+            pass
+
     itens = _lista_campos(dados)
     while True:
         _imprimir_tabela(dados.caso_nome, itens)
-        _imprimir_avisos_ocr(dados)
+        _imprimir_avisos_ocr(dados, itens)
         _imprimir_plano_gw(dados)
         print(
             "\n  ┌─────────────────────────────────────────────────┐\n"
@@ -119,7 +139,6 @@ def confirmar_dados_caso(dados: DadosCaso) -> Optional[DadosCaso]:
 def _lista_campos(dados: DadosCaso) -> List[Tuple[str, str, str]]:
     """
     Só campos que o bot preenche de fato (testados).
-    Fora da lista: apelido, telefone, e-mail, escolaridade, etc.
     """
     itens: List[Tuple[str, str, str]] = []
 
@@ -128,6 +147,7 @@ def _lista_campos(dados: DadosCaso) -> List[Tuple[str, str, str]]:
     for k in (
         "cpf",
         "nome",
+        "telefone_celular",
         "cep",
         "endereco",
         "bairro",
@@ -178,6 +198,8 @@ def _lista_campos(dados: DadosCaso) -> List[Tuple[str, str, str]]:
         "tipo",
         "cap_carga",
         "tara",
+        "cidade",
+        "uf",
     )
 
     if dados.veiculo:
@@ -236,7 +258,16 @@ def _imprimir_tabela(caso_nome: str, itens: List[Tuple[str, str, str]]) -> None:
     for i, (secao, chave, val) in enumerate(itens, 1):
         if secao != secao_atual:
             secao_atual = secao
-            print(f"\n  [{secao.upper()}]")
+            titulo_secao = secao.upper()
+            if titulo_secao == "VEICULO":
+                titulo_secao = "VEICULO (CAVALO)"
+            elif titulo_secao == "CARRETA":
+                titulo_secao = "CARRETA (SEMI-REBOQUE)"
+            elif titulo_secao == "PROPRIETARIO":
+                titulo_secao = "PROPRIETARIO DO CAVALO"
+            elif titulo_secao == "PROP_CARRETA":
+                titulo_secao = "PROPRIETARIO DA CARRETA"
+            print(f"\n  [{titulo_secao}]")
         marca = " " if val else "·"
         vshow = val if val else "(vazio)"
         if len(vshow) > 50:
@@ -250,45 +281,84 @@ def _imprimir_tabela(caso_nome: str, itens: List[Tuple[str, str, str]]) -> None:
     print("  ([!]OCR = confira no documento - foto ruim troca B/H, 0/O, Z/2)")
 
 
-def _imprimir_avisos_ocr(dados: DadosCaso) -> None:
+def _imprimir_avisos_ocr(
+    dados: DadosCaso,
+    itens: Optional[List[Tuple[str, str, str]]] = None,
+) -> None:
     """Mostra o que o OCR marcou como duvidoso / possivelmente incorreto."""
     avisos = list(getattr(dados, "avisos_ocr", None) or [])
-    # reforço: se placa/renavam/chassi preenchidos, lembrar de checar
-    criticos_preenchidos = []
-    for secao, v in dados.veiculos_composicao():
-        if not v:
-            continue
-        for k in ("placa", "renavam", "chassi"):
-            if getattr(v, k, None):
-                criticos_preenchidos.append(f"{secao}.{k}={getattr(v, k)}")
 
-    if not avisos and not criticos_preenchidos:
+    tem_veiculos = bool(dados.veiculo or dados.carreta or dados.bitrem)
+    if not avisos and not tem_veiculos:
         return
 
-    print(f"\n{'─'*60}")
+    mapa_nums: Dict[Tuple[str, str], int] = {}
+    if itens:
+        for idx, (secao, chave, _) in enumerate(itens, 1):
+            mapa_nums[(secao.lower(), chave.lower())] = idx
+
+    def rotulo(secao: str, chave: str) -> str:
+        n = mapa_nums.get((secao.lower(), chave.lower()))
+        return f"[Campo {n:2d}]" if n else "        "
+
+    print(f"\n{'-'*60}")
     print(" [!]  CAMPOS QUE PODEM ESTAR INCORRETOS (OCR)")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
     if avisos:
-        print("  Avisos automáticos da leitura:")
+        print("  Avisos automaticos da leitura:")
         for a in avisos[:25]:
-            print(f"    · {a}")
+            print(f"    - {a}")
         if len(avisos) > 25:
-            print(f"    · ... +{len(avisos) - 25} aviso(s)")
+            print(f"    - ... +{len(avisos) - 25} aviso(s)")
     else:
         print("  Nenhum alerta forte, mas sempre confira no documento:")
-    if criticos_preenchidos:
-        print("  Valores críticos extraídos (compare com a foto/PDF):")
-        for c in criticos_preenchidos:
-            print(f"    -> {c}")
+
+    print("  Valores críticos extraídos (compare com a foto/PDF):")
+
+    if dados.veiculo:
+        v = dados.veiculo
+        cid_v = f"{v.cidade}/{v.uf}" if (v.cidade and v.uf) else (v.cidade or v.uf or "(não identificada)")
+        print("    [CAVALO]")
+        print(f"      {rotulo('veiculo', 'placa')} Placa do Cavalo:   {v.placa or '(vazio)'}")
+        print(f"      {rotulo('veiculo', 'chassi')} Chassi do Cavalo:  {v.chassi or '(vazio)'}")
+        print(f"      {rotulo('veiculo', 'renavam')} Renavam do Cavalo: {v.renavam or '(vazio)'}")
+        print(f"      {rotulo('veiculo', 'cidade')} Cidade do Cavalo:  {cid_v}")
+        if getattr(dados, "proprietario", None):
+            p = dados.proprietario
+            cid_p = f"{p.cidade}/{p.uf}" if (p.cidade and p.uf) else (p.cidade or p.uf or "(não identificada)")
+            print(f"      {rotulo('proprietario', 'cidade')} Cidade do Dono:    {cid_p}")
+
+    if dados.carreta:
+        c = dados.carreta
+        cid_c = f"{c.cidade}/{c.uf}" if (c.cidade and c.uf) else (c.cidade or c.uf or "(não identificada)")
+        print("    [CARRETA]")
+        print(f"      {rotulo('carreta', 'placa')} Placa da Carreta:   {c.placa or '(vazio)'}")
+        print(f"      {rotulo('carreta', 'chassi')} Chassi da Carreta:  {c.chassi or '(vazio)'}")
+        print(f"      {rotulo('carreta', 'renavam')} Renavam da Carreta: {c.renavam or '(vazio)'}")
+        print(f"      {rotulo('carreta', 'cidade')} Cidade da Carreta:  {cid_c}")
+        if getattr(dados.carreta, "proprietario", None):
+            pc = dados.carreta.proprietario
+            cid_pc = f"{pc.cidade}/{pc.uf}" if (pc.cidade and pc.uf) else (pc.cidade or pc.uf or "(não identificada)")
+            print(f"      {rotulo('prop_carreta', 'cidade')} Cidade Dono Carreta: {cid_pc}")
+
+    if dados.bitrem:
+        b = dados.bitrem
+        cid_b = f"{b.cidade}/{b.uf}" if (b.cidade and b.uf) else (b.cidade or b.uf or "(não identificada)")
+        print("    [BI-TREM]")
+        print(f"      {rotulo('bitrem', 'placa')} Placa do Bi-Trem:   {b.placa or '(vazio)'}")
+        print(f"      {rotulo('bitrem', 'chassi')} Chassi do Bi-Trem:  {b.chassi or '(vazio)'}")
+        print(f"      {rotulo('bitrem', 'renavam')} Renavam do Bi-Trem: {b.renavam or '(vazio)'}")
+        print(f"      {rotulo('bitrem', 'cidade')} Cidade do Bi-Trem:  {cid_b}")
+
     print("  Se algum estiver errado: digite o NÚMERO do campo e corrija.")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
 
 
 def _imprimir_plano_gw(dados: DadosCaso) -> None:
     """Mostra o que o robô fará nos 3 pontinhos (sempre pesquisa primeiro)."""
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(" PLANO NO GW (sempre PESQUISA antes de cadastrar novo)")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
     m = dados.motorista
     print(
         f"  1. Motorista CPF {m.cpf or '?'} - pessoais+docs -> SALVA "

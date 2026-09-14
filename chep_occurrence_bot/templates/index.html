@@ -436,10 +436,14 @@
             </label>
 
             <div style="margin-top: 10px;">
-              <label>📷 Anexar Foto NF / Comprovante (WhatsApp / Tirar Foto):</label>
-              <input type="file" id="photo" name="photo" accept="image/*,application/pdf">
-              <div style="margin-top: 5px;">
-                <button type="button" class="btn-remove-photo" onclick="clearPhoto()">❌ Remover Foto Anexada</button>
+              <label>📷 Anexar Foto 1 / NF / Comprovante:</label>
+              <input type="file" id="photo" name="photo" accept="image/*,application/pdf" multiple>
+
+              <label style="margin-top: 10px; display: block;">📷 Anexar Foto 2 (Opcional):</label>
+              <input type="file" id="photo2" name="photo2" accept="image/*,application/pdf">
+
+              <div style="margin-top: 8px;">
+                <button type="button" class="btn-remove-photo" onclick="clearPhoto()">❌ Remover Fotos Anexadas</button>
               </div>
             </div>
           </div>
@@ -604,6 +608,9 @@
 
     function clearPhoto() {
       document.getElementById('photo').value = '';
+      if (document.getElementById('photo2')) {
+        document.getElementById('photo2').value = '';
+      }
     }
 
     function toggleTestMode() {

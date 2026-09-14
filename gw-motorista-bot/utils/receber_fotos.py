@@ -59,7 +59,7 @@ def _eh_arquivo_valido(path: Path) -> bool:
     name = path.name.lower()
     if path.suffix.lower() in (".bat", ".lnk", ".url", ".exe", ".cmd"):
         return False
-    if any(x in name for x in ("iniciar", "robo", "robô", "shortcut")):
+    if any(x in name for x in ("iniciar", "robo", "robô", "shortcut", "como_usar", "como usar", "readme", "leia")):
         return False
     return path.is_file() and path.suffix.lower() in EXTENSOES_FOTO
 
@@ -86,12 +86,14 @@ def listar_casos(input_dir: Path | None = None) -> List[CasoCadastro]:
                 p for p in item.rglob("*") 
                 if _eh_arquivo_valido(p) and "_originais" not in p.parts
             )
-            if arquivos:
+            # Só considera caso se tiver ao menos 1 documento visual (PDF/imagem)
+            if arquivos and any(p.suffix.lower() != ".txt" for p in arquivos):
                 casos.append(CasoCadastro(nome=item.name, pasta=item, arquivos=arquivos))
 
-    soltos = sorted(p for p in base.iterdir() if _eh_arquivo_valido(p))
-    if soltos:
-        casos.append(CasoCadastro(nome="lote_solto", pasta=base, arquivos=soltos))
+    soltos_doc = sorted(p for p in base.iterdir() if _eh_arquivo_valido(p) and p.suffix.lower() != ".txt")
+    if soltos_doc:
+        soltos_txt = sorted(p for p in base.iterdir() if _eh_arquivo_valido(p) and p.suffix.lower() == ".txt")
+        casos.append(CasoCadastro(nome="lote_solto", pasta=base, arquivos=soltos_doc + soltos_txt))
 
     return casos
 

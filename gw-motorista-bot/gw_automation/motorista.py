@@ -17,6 +17,18 @@ from ocr.extrair_dados import DadosMotorista
 from utils.texto import gw_texto
 
 
+def _extrair_ddd_e_telefone(texto: str) -> tuple[str, str]:
+    """Extrai (ddd, numero) de strings como '62 9 8188 0128', '(62) 98188-0128', etc."""
+    digs = "".join(c for c in (texto or "") if c.isdigit())
+    if digs.startswith("55") and len(digs) in (12, 13):
+        digs = digs[2:]
+    if len(digs) >= 10:
+        return digs[:2], digs[2:]
+    elif len(digs) in (8, 9):
+        return "", digs
+    return "", ""
+
+
 def preencher_dados_pessoais(page: Page, dados: DadosMotorista) -> None:
     """
     Ordem importante (regra do usuário):
@@ -72,6 +84,16 @@ def preencher_dados_pessoais(page: Page, dados: DadosMotorista) -> None:
 
     # Só preenche se o campo ainda estiver vazio (não apaga o que já está salvo)
     _fill_se_vazio(page, "nome", dados.nome)
+
+    # Telefone Celular
+    tel_cel = getattr(dados, "telefone_celular", "") or ""
+    if tel_cel:
+        ddd_cel, num_cel = _extrair_ddd_e_telefone(tel_cel)
+        if ddd_cel and not _campo_preenchido(page, "ddd2"):
+            _fill_se_vazio(page, "ddd2", ddd_cel)
+        if num_cel and not _campo_preenchido(page, "telefone2"):
+            _fill_se_vazio(page, "telefone2", num_cel)
+            print(f"  [OK] Telefone celular preenchido: ({ddd_cel}) {num_cel}")
 
     # CEP / endereço só se faltando
     if not _campo_preenchido(page, "cep"):

@@ -618,14 +618,16 @@ def execute_occurrence():
         if not delivery:
             return jsonify({"success": False, "error": "Número da delivery é obrigatório!"}), 400
 
-        # --- Anexo opcional ---
-        attachment_path = None
-        if "photo" in request.files:
-            file = request.files["photo"]
-            if file and file.filename:
-                file_path = os.path.join(UPLOADS_DIR, f"{int(time.time())}_{file.filename}")
-                file.save(file_path)
-                attachment_path = file_path
+        # --- Anexos opcionais (Múltiplas fotos) ---
+        attachment_paths = []
+        for key in request.files:
+            for file in request.files.getlist(key):
+                if file and file.filename:
+                    file_path = os.path.join(UPLOADS_DIR, f"{int(time.time())}_{file.filename}")
+                    file.save(file_path)
+                    attachment_paths.append(file_path)
+
+        attachment_path = attachment_paths if attachment_paths else None
 
         # --- Caso de coleta do dia ---
         if coleta_dia:
@@ -662,7 +664,8 @@ def execute_occurrence():
                             remove_delivery_from_monitoring(delivery)
                             return
                         elif not res1:
-                            append_log("❌ Falha no envio da ocorrência do motorista.")
+                            append_log("❌ Falha no envio da ocorrência do motorista. Interrompendo fila para esta delivery.")
+                            return
                     if include_location and location_text:
                         append_log("[2/3] Ocorrência de STATUS / LOCALIZAÇÃO...")
                         fut2 = asyncio.run_coroutine_threadsafe(
@@ -683,7 +686,7 @@ def execute_occurrence():
                         elif not res2:
                             append_log("❌ Falha no envio da ocorrência de localização.")
                         else:
-                            append_log("[LOG] 🚀 Nota COLETADO criada com sucesso.")
+                            append_log(f"[LOG] 🚀 Nota '{note_type}' criada com sucesso.")
 
                     if include_contact:
                         append_log("[3/3] Resposta no 2º site (contact.cmaweb.chep.com)...")

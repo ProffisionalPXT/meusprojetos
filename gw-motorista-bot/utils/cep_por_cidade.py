@@ -125,11 +125,13 @@ def buscar_cep_por_cidade(
         return "", None
 
     # 1) ViaCEP pela cidade de nascimento
-    cep = buscar_cep_viacep(cid.title() if cid.isupper() else cid, uf_n or "PE")
+    cep = ""
+    if uf_n:
+        cep = buscar_cep_viacep(cid.title() if cid.isupper() else cid, uf_n)
     if cep:
         end = buscar_endereco_regiao(naturalidade=cid, cidade=cid, uf=uf_n)
         if not end:
-            end = EnderecoPadrao(cid, uf_n or "PE", cep, "RUA DO COMERCIO", "CENTRO")
+            end = EnderecoPadrao(cid, uf_n, cep, "RUA DO COMERCIO", "CENTRO")
         return cep, end
 
     # 2) Faixa conhecida

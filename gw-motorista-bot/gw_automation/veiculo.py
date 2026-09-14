@@ -72,7 +72,7 @@ def garantir_veiculo(
     )
 
     # Sempre confere #vei_placa / #car_placa na aba do MOTORISTA
-    page.wait_for_timeout(700)
+    page.wait_for_timeout(400)
     try:
         from gw_automation.lookup import _garantir_pagina_motorista_operacional
 
@@ -123,7 +123,7 @@ def garantir_veiculo(
             filtro="Placa",
             preencher_novo=_novo,
         )
-        page.wait_for_timeout(600)
+        page.wait_for_timeout(300)
         val = _ler_placa_campo(page, seletor_campo)
         if placa_ok and placa_ok in val.replace("-", ""):
             print(f"[Veículo] [OK] {label_campo} vinculado no motorista: {val}")

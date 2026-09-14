@@ -712,33 +712,38 @@ def buscar_com_tres_pontinhos(
 
         try:
             if form_page and not form_page.is_closed():
-                form_page.wait_for_timeout(1200)
+                form_page.wait_for_timeout(800)  # Reduzido de 1200
         except Exception:
             pass
 
-        # Fecha cadastro + popup; vínculo = reabrir Localizar e clicar na lista
+        # Fecha APENAS a aba de cadastro (form_page); MANTÉM a popup aberta!
         try:
             if form_page and not form_page.is_closed():
                 _fechar_e_voltar(form_page, popup, page)
         except Exception:
             pass
-        try:
-            _fechar(popup)
-        except Exception:
-            pass
+        # _fechar(popup) REMOVIDO para reutilizar a janela
+
         try:
             if form_page and not form_page.is_closed():
                 form_page.close()
         except Exception:
             pass
 
-        # Após Novo Cadastro: volta à página de ORIGEM (cadveiculo OU motorista)
-        page = _garantir_pagina_origem(
-            page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
-        )
-        page.wait_for_timeout(1000)
+        # Foca de volta na popup se ela ainda estiver aberta
+        try:
+            if popup and not popup.is_closed():
+                popup.bring_to_front()
+                popup.wait_for_timeout(400)
+            else:
+                page = _garantir_pagina_origem(
+                    page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
+                )
+                page.wait_for_timeout(600)  # Reduzido de 1000
+        except Exception:
+            pass
 
-        # Sempre reabre Localizar -> pesquisa o que acabou de criar -> SELECIONA
+        # Sempre reabre/reutiliza Localizar -> pesquisa o que acabou de criar -> SELECIONA
         if seletor_campo and _campo_origem_preenchido(page, seletor_campo):
             print(f"[Lookup] [OK] Campo {seletor_campo} já preenchido após salvar")
             return True
@@ -750,10 +755,12 @@ def buscar_com_tres_pontinhos(
         max_pesq = lookup_max_tentativas_pesquisa()
         for tentativa in range(1, max_pesq + 1):
             print(f"[Lookup] Vínculo tentativa {tentativa}/{max_pesq}...")
-            page = _garantir_pagina_origem(
-                page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
-            )
-            page.wait_for_timeout(400)
+            # Só garante origem se a popup estiver fechada
+            if not popup or popup.is_closed():
+                page = _garantir_pagina_origem(
+                    page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
+                )
+                page.wait_for_timeout(400)
             ok_v = _reabrir_e_selecionar(
                 page,
                 termo=termo_busca,
@@ -763,8 +770,9 @@ def buscar_com_tres_pontinhos(
                 filtro=filtro,
                 uf_preferida=uf,
                 match_exato=match_exato,
+                popup_existente=popup,
             )
-            page.wait_for_timeout(900)
+            page.wait_for_timeout(500)  # Reduzido de 900
             if seletor_campo and _campo_origem_preenchido(page, seletor_campo):
                 print(
                     f"[Lookup] [OK] Criado e VINCULADO: {termo_busca} -> {seletor_campo}"
@@ -772,7 +780,8 @@ def buscar_com_tres_pontinhos(
                 return True
             if ok_v and not seletor_campo:
                 return True
-            page.wait_for_timeout(600 + tentativa * 200)
+            page.wait_for_timeout(400 + tentativa * 200)  # Reduzido de 600
+
 
         # 0 resultados após "salvar" = NÃO gravou -> pausa manual antes de recriar
         r = pausar_para_manual(
@@ -971,47 +980,62 @@ def _garantir_pagina_motorista_operacional(page: Page) -> Page:
 
 def _reabrir_e_selecionar(
     page: Page,
-    *,
     termo: str,
+    *,
     label_campo: str = "",
     seletor_campo: str = "",
     seletor_botao: str = "",
     filtro: str = "",
     uf_preferida: str = "",
     match_exato: bool = False,
+    popup_existente: Optional[Page] = None,
 ) -> bool:
-    """Abre de novo os 3 pontinhos, pesquisa e seleciona (após Novo Cadastro)."""
-    if not termo:
-        return False
-    # NÃO força motorista se o form de origem é cadveiculo (marca/prop/cidade)
-    page = _garantir_pagina_origem(
-        page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
-    )
-    # fecha popups Localizar órfãs
-    try:
-        for p in list(page.context.pages):
-            try:
-                u = (p.url or "").lower()
-                if p != page and "localiza" in u:
-                    p.close()
-            except Exception:
-                continue
-    except Exception:
-        pass
-    page.bring_to_front()
-    page.wait_for_timeout(300)
-    try:
-        popup = _abrir_lookup(
-            page,
-            seletor_campo=seletor_campo,
-            seletor_botao=seletor_botao,
-            label_campo=label_campo,
+    """Abre (ou reaproveita) a popup Localizar, pesquisa e clica no resultado."""
+    popup = popup_existente
+    reaproveitando = popup and not popup.is_closed()
+    
+    if reaproveitando:
+        print(f"[Lookup] Pesquisando '{termo}' na janela já aberta ({label_campo})...")
+    else:
+        print(f"[Lookup] Abrindo Localizar para pesquisar '{termo}' ({label_campo})...")
+
+    if not reaproveitando:
+        # NÃO força motorista se o form de origem é cadveiculo (marca/prop/cidade)
+        page = _garantir_pagina_origem(
+            page, seletor_campo=seletor_campo, seletor_botao=seletor_botao
         )
-    except Exception as e:
-        print(f"[Lookup] reabrir lookup: {e}")
-        return False
-    if popup is None:
-        return False
+        # fecha popups Localizar órfãs se vamos abrir uma nova
+        try:
+            for p in list(page.context.pages):
+                try:
+                    u = (p.url or "").lower()
+                    if p != page and "localiza" in u:
+                        p.close()
+                except Exception:
+                    continue
+        except Exception:
+            pass
+        page.bring_to_front()
+        page.wait_for_timeout(300)
+        try:
+            popup = _abrir_lookup(
+                page,
+                seletor_campo=seletor_campo,
+                seletor_botao=seletor_botao,
+                label_campo=label_campo,
+            )
+        except Exception as e:
+            print(f"[Lookup] reabrir lookup: {e}")
+            return False
+        if popup is None:
+            return False
+    else:
+        # Se estamos reaproveitando, traz a popup para frente
+        try:
+            popup.bring_to_front()
+        except Exception:
+            pass
+
     try:
         if filtro:
             _selecionar_filtro(popup, filtro)

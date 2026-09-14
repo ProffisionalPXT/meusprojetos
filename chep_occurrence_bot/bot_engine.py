@@ -17,6 +17,7 @@ class CHEPBotEngine:
         self.contexts: Dict[str, BrowserContext] = {}
         self.pages: Dict[str, Page] = {}
         self.approval_state = {"event": None, "action": None, "image_url": None, "delivery": None}
+        self.current_searched_delivery: Dict[str, str] = {}
         self.load_env_vars()
 
     @property
@@ -392,36 +393,64 @@ class CHEPBotEngine:
                 await card_header.click()
                 await asyncio.sleep(2)
 
-            # Apenas após Login e Gestão de Carga, inicia a pesquisa da Delivery
-            self.log(f"\n🟢 [Passo 2/2] Pesquisando a Delivery #{delivery_clean} na Gestão de Carga...")
-            
+            # OTIMIZAÇÃO: Verifica se a Delivery já está filtrada e visível na tela
+            clean_profile_id = "PURM3" if "PURM3" in profile_name.upper() else "PURM2"
+            page_key = f"{clean_profile_id}_cma"
+            btn_criar_nota_test = page.get_by_role("button", name="CRIAR UMA NOTA")
+
+            is_already_searched = False
             try:
-                await page.bring_to_front()
-            except:
+                if self.current_searched_delivery.get(page_key) == delivery_clean:
+                    if await btn_criar_nota_test.is_visible(timeout=1000):
+                        is_already_searched = True
+                        self.log(f"⚡ [OTIMIZAÇÃO] Delivery #{delivery_clean} já está pesquisada na tela! Prosseguindo direto para a modal...")
+            except Exception:
                 pass
 
-            deliv_input = page.locator('app-data-filter-multi-string-input').filter(has_text='Número de entrega').get_by_role('textbox')
-            if not await deliv_input.is_visible(timeout=2000):
-                deliv_input = page.locator("app-data-filter-multi-string-input input, input[placeholder*='entrega']").last
+            if not is_already_searched:
+                self.log(f"\n🟢 [Passo 2/2] Pesquisando a Delivery #{delivery_clean} na Gestão de Carga...")
+                
+                try:
+                    await page.bring_to_front()
+                except:
+                    pass
 
-            if await deliv_input.is_visible(timeout=2500):
-                await deliv_input.click(force=True)
-                await deliv_input.fill("")
-                await deliv_input.fill(delivery_clean)
-                await deliv_input.press("Enter")
-                self.log(f"   🟢 [OK] Número de entrega ({delivery_clean}) confirmado via Enter!")
-                await asyncio.sleep(0.5)
+                deliv_input = page.locator('app-data-filter-multi-string-input').filter(has_text='Número de entrega').get_by_role('textbox')
+                if not await deliv_input.is_visible(timeout=2000):
+                    deliv_input = page.locator("app-data-filter-multi-string-input input, input[placeholder*='entrega']").last
 
-                btn_apply = page.get_by_role('button', name=' Apply')
-                if not await btn_apply.is_visible(timeout=1500):
-                    btn_apply = page.get_by_role("button", name="Apply")
-                if not await btn_apply.is_visible(timeout=1500):
-                    btn_apply = page.locator("button:has-text('APPLY'), button:has-text('Apply')").first
+                if await deliv_input.is_visible(timeout=2500):
+                    await deliv_input.click(force=True)
+                    await deliv_input.fill("")
+                    await deliv_input.fill(delivery_clean)
+                    await deliv_input.press("Enter")
+                    self.log(f"   🟢 [OK] Número de entrega ({delivery_clean}) confirmado via Enter!")
+                    await asyncio.sleep(0.5)
 
-                if await btn_apply.is_visible(timeout=2000):
-                    await btn_apply.click(force=True)
-                    self.log("   🟢 [OK] Clicado no botão Apply!")
-                    await asyncio.sleep(2.5)
+                    btn_apply = page.get_by_role('button', name=' Apply')
+                    if not await btn_apply.is_visible(timeout=1500):
+                        btn_apply = page.get_by_role("button", name="Apply")
+                    if not await btn_apply.is_visible(timeout=1500):
+                        btn_apply = page.locator("button:has-text('APPLY'), button:has-text('Apply')").first
+
+                    if await btn_apply.is_visible(timeout=2000):
+                        await btn_apply.click(force=True)
+                        self.log("   🟢 [OK] Clicado no botão Apply!")
+                        await asyncio.sleep(2.5)
+                        self.current_searched_delivery[page_key] = delivery_clean
+
+            # --- CHECAGEM RIGOROSA DE "0 Entregas selecionadas" LOGO APÓS A PESQUISA ---
+            zero_locator = page.locator("text=/0\\s+entregas\\s+selecionadas/i").first
+            btn_exists = page.locator("button, a").filter(has_text="CRIAR UMA NOTA")
+            
+            try:
+                if await zero_locator.is_visible(timeout=1500) or (await btn_exists.count() == 0 and not await page.locator(".modal-content").is_visible(timeout=500)):
+                    if await zero_locator.is_visible(timeout=500) or await btn_exists.count() == 0:
+                        self.log(f"   ❌ ERRO: A Delivery #{delivery_clean} NÃO EXISTE no perfil {profile_name} (0 Entregas selecionadas).")
+                        self.current_searched_delivery[page_key] = None
+                        return "ZERO_ENTREGAS"
+            except Exception:
+                pass
 
             modal = page.locator(".modal-content").filter(has_text="Criação de notas").first
 
@@ -431,11 +460,11 @@ class CHEPBotEngine:
             for attempt in range(1, max_modal_attempts + 1):
                 self.log(f"\n⏳ [2/6] Verificando e abrindo a Modal (Tentativa {attempt}/{max_modal_attempts})...")
                 
-                # --- VERIFICAÇÃO DE "0 Entregas selecionadas" ---
+                # --- VERIFICAÇÃO DE "0 Entregas selecionadas" NO LOOP ---
                 try:
-                    zero_entregas_text = page.locator("body").filter(has_text="0 Entregas selecionadas").first
-                    if await zero_entregas_text.is_visible(timeout=500):
-                        self.log(f"   ❌ ERRO: A página mostra '0 Entregas selecionadas'. A Delivery #{delivery_clean} não existe neste perfil!")
+                    if await zero_locator.is_visible(timeout=500):
+                        self.log(f"   ❌ ERRO: A Delivery #{delivery_clean} NÃO EXISTE no perfil {profile_name} (0 Entregas selecionadas).")
+                        self.current_searched_delivery[page_key] = None
                         return "ZERO_ENTREGAS"
                 except Exception:
                     pass
@@ -676,32 +705,37 @@ class CHEPBotEngine:
             except Exception as e_ed:
                 self.log(f"   ⚠️ Falha ao digitar texto no editor: {e_ed}")
 
-            # ANEXAR FOTO / ARQUIVO
-            if attachment_path and os.path.exists(attachment_path):
-                self.log(f"📎 [5/6] Anexando arquivo: {os.path.basename(attachment_path)}...")
-                try:
-                    # 1. Localiza o input de arquivo (mesmo que esteja invisível/escondido na modal)
-                    file_input = modal.locator('input[type="file"]').first
-                    if await file_input.count() == 0:
-                        file_input = page.locator('input[type="file"]').first
+            # ANEXAR FOTO / ARQUIVOS (Suporte a anexos sequenciais)
+            paths = []
+            if isinstance(attachment_path, list):
+                paths = [p for p in attachment_path if p and os.path.exists(p)]
+            elif isinstance(attachment_path, str) and os.path.exists(attachment_path):
+                paths = [attachment_path]
 
-                    if await file_input.count() > 0:
-                        # Usa o método correto da API Python do Playwright: set_input_files
-                        await file_input.set_input_files(attachment_path)
-                        await asyncio.sleep(1.5)
-                        self.log("   🟢 [OK] Arquivo anexado com sucesso via set_input_files!")
-                    else:
-                        # 2. Fallback via acionamento do botão 'Anexos'
-                        anexo_btn = modal.get_by_text('Anexos').first
-                        if await anexo_btn.is_visible(timeout=2000):
-                            async with page.expect_file_chooser() as fc_info:
-                                await anexo_btn.click(force=True)
-                            file_chooser = await fc_info.value
-                            await file_chooser.set_files(attachment_path)
+            if paths:
+                filenames_str = ", ".join([os.path.basename(p) for p in paths])
+                self.log(f"📎 [5/6] Anexando {len(paths)} foto(s) sequencialmente: {filenames_str}...")
+                for idx, single_path in enumerate(paths, start=1):
+                    try:
+                        file_input = modal.locator('input[type="file"]').first
+                        if await file_input.count() == 0:
+                            file_input = page.locator('input[type="file"]').first
+
+                        if await file_input.count() > 0:
+                            await file_input.set_input_files(single_path)
                             await asyncio.sleep(1.5)
-                            self.log("   🟢 [OK] Foto anexada via botão 'Anexos'!")
-                except Exception as e_att:
-                    self.log(f"   ⚠️ Falha ao anexar foto: {e_att}")
+                            self.log(f"   🟢 [OK] Foto {idx}/{len(paths)} ({os.path.basename(single_path)}) anexada com sucesso!")
+                        else:
+                            anexo_btn = modal.get_by_text('Anexos').first
+                            if await anexo_btn.is_visible(timeout=2000):
+                                async with page.expect_file_chooser() as fc_info:
+                                    await anexo_btn.click(force=True)
+                                file_chooser = await fc_info.value
+                                await file_chooser.set_files(single_path)
+                                await asyncio.sleep(1.5)
+                                self.log(f"   🟢 [OK] Foto {idx}/{len(paths)} ({os.path.basename(single_path)}) anexada via botão 'Anexos'!")
+                    except Exception as e_att:
+                        self.log(f"   ⚠️ Falha ao anexar foto {idx} ({os.path.basename(single_path)}): {e_att}")
             else:
                 self.log("📎 [5/6] Nenhum anexo de foto pendente para enviar.")
 
@@ -950,26 +984,34 @@ class CHEPBotEngine:
             await contact_page.keyboard.press("Backspace")
             await asyncio.sleep(1)
 
-            # ANEXAR FOTO / ARQUIVO NO SERVICE DESK (2º SITE)
-            if attachment_path and os.path.exists(attachment_path):
-                self.log(f"📎 [Service Desk] Anexando foto/comprovante: {os.path.basename(attachment_path)}...")
-                try:
-                    file_input = contact_page.locator("input[type='file']").first
-                    if await file_input.count() > 0:
-                        await file_input.set_input_files(attachment_path)
-                        await asyncio.sleep(2)
-                        self.log("   🟢 [OK] Foto anexada no Service Desk com sucesso!")
-                    else:
-                        select_file_btn = contact_page.locator("a:has-text('or select a file'), label:has-text('or select a file'), :has-text('or select a file')").last
-                        if await select_file_btn.is_visible(timeout=3000):
-                            async with contact_page.expect_file_chooser() as fc_info:
-                                await select_file_btn.click(force=True)
-                            file_chooser = await fc_info.value
-                            await file_chooser.set_files(attachment_path)
+            # ANEXAR FOTO / ARQUIVOS NO SERVICE DESK (2º SITE - SEQUENCIAL)
+            paths = []
+            if isinstance(attachment_path, list):
+                paths = [p for p in attachment_path if p and os.path.exists(p)]
+            elif isinstance(attachment_path, str) and os.path.exists(attachment_path):
+                paths = [attachment_path]
+
+            if paths:
+                filenames_str = ", ".join([os.path.basename(p) for p in paths])
+                self.log(f"📎 [Service Desk] Anexando {len(paths)} foto(s) sequencialmente: {filenames_str}...")
+                for idx, single_path in enumerate(paths, start=1):
+                    try:
+                        file_input = contact_page.locator("input[type='file']").first
+                        if await file_input.count() > 0:
+                            await file_input.set_input_files(single_path)
                             await asyncio.sleep(2)
-                            self.log("   🟢 [OK] Foto anexada clicando em 'or select a file'!")
-                except Exception as e_att:
-                    self.log(f"   ⚠️ Falha ao anexar no Service Desk: {e_att}")
+                            self.log(f"   🟢 [OK] Foto {idx}/{len(paths)} ({os.path.basename(single_path)}) anexada no Service Desk com sucesso!")
+                        else:
+                            select_file_btn = contact_page.locator("a:has-text('or select a file'), label:has-text('or select a file'), :has-text('or select a file')").last
+                            if await select_file_btn.is_visible(timeout=3000):
+                                async with contact_page.expect_file_chooser() as fc_info:
+                                    await select_file_btn.click(force=True)
+                                file_chooser = await fc_info.value
+                                await file_chooser.set_files(single_path)
+                                await asyncio.sleep(2)
+                                self.log(f"   🟢 [OK] Foto {idx}/{len(paths)} ({os.path.basename(single_path)}) anexada via botão no Service Desk!")
+                    except Exception as e_att:
+                        self.log(f"   ⚠️ Falha ao anexar foto {idx} no Service Desk: {e_att}")
 
             send_btn = contact_page.locator("button:has(.fa-paper-plane), button:has-text('Send'), button.btn-primary:has(svg)").first
             if await send_btn.is_visible(timeout=3000):

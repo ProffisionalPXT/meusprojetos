@@ -70,6 +70,27 @@ def gemini_validar_nomes_ativo() -> bool:
         return v not in ("0", "false", "nao", "não", "no", "off")
 
 
+def _extrair_telefone_de_texto(texto: str) -> str:
+    """Extrai telefone com DDD (10 ou 11 dígitos) de texto livre."""
+    if not texto:
+        return ""
+    padroes = [
+        r"(?:(?:\+|00)?55\s*)?(?:\(?([1-9][0-9])\)?\s*)?(?:9\s*[0-9]{4}[-\s]*[0-9]{4}|[2-9][0-9]{3}[-\s]*[0-9]{4})",
+    ]
+    for p in padroes:
+        m = re.search(p, texto)
+        if m:
+            digs = "".join(c for c in m.group(0) if c.isdigit())
+            if digs.startswith("55") and len(digs) in (12, 13):
+                digs = digs[2:]
+            if len(digs) in (10, 11):
+                return digs
+    digs_todos = re.findall(r"\b[1-9][0-9]{9,10}\b", texto)
+    if digs_todos:
+        return digs_todos[0]
+    return ""
+
+
 from ocr.models import DadosMotorista, DadosVeiculo, DadosProprietario, DadosCaso
 def extrair_dados_do_caso(caso: CasoCadastro) -> DadosCaso:
     """
@@ -83,7 +104,24 @@ def extrair_dados_do_caso(caso: CasoCadastro) -> DadosCaso:
     )
     dados.motorista.fotos = [str(a) for a in caso.arquivos]
 
-    grupos = agrupar_por_tipo(caso.arquivos)
+    # Verifica se há telefone no nome da pasta ou em arquivo .txt
+    tel_caso = _extrair_telefone_de_texto(caso.nome)
+    for arq in caso.arquivos:
+        if arq.suffix.lower() == ".txt":
+            try:
+                conteudo = arq.read_text(encoding="utf-8", errors="ignore")
+                tel_arq = _extrair_telefone_de_texto(conteudo) or _extrair_telefone_de_texto(arq.stem)
+                if tel_arq:
+                    tel_caso = tel_arq
+                    break
+            except Exception:
+                pass
+    if tel_caso:
+        dados.motorista.telefone_celular = tel_caso
+        print(f"[Info] Telefone celular identificado no caso: {tel_caso}")
+
+    arquivos_visuais = [a for a in caso.arquivos if a.suffix.lower() != ".txt"]
+    grupos = agrupar_por_tipo(arquivos_visuais)
     tacs = grupos[TipoDocumento.TAC]
     cnhs = grupos[TipoDocumento.CNH]
     crlvs = grupos[TipoDocumento.CRLV]
@@ -91,7 +129,7 @@ def extrair_dados_do_caso(caso: CasoCadastro) -> DadosCaso:
 
     engine = motor_ocr()
     dados.fonte_ocr = engine
-    print(f"[OCR] Caso '{caso.nome}': {len(caso.arquivos)} arquivo(s) | engine={engine}")
+    print(f"[OCR] Caso '{caso.nome}': {len(arquivos_visuais)} documento(s) visual(is) | engine={engine}")
     n_ign = len(grupos.get(TipoDocumento.IGNORAR, []))
     print(
         f"      TAC={len(tacs)} CNH={len(cnhs)} CRLV={len(crlvs)} "
@@ -99,7 +137,7 @@ def extrair_dados_do_caso(caso: CasoCadastro) -> DadosCaso:
         + (f" IGNORAR={n_ign}" if n_ign else "")
     )
 
-    extracoes = _rodar_extracao(caso.arquivos, engine)
+    extracoes = _rodar_extracao(arquivos_visuais, engine) if arquivos_visuais else {}
     dados.extracoes_gemini = extracoes  # mantém nome do campo (legado)
 
     crlvs_efetivos = _lista_arquivos_crlv(
@@ -520,10 +558,28 @@ def _rodar_extracao(
         print("[OCR] Motor GEMINI Vision (todos os arquivos)...")
         return extrair_varios_gemini(list(arquivos))
 
-    # local e auto: Tesseract 1ª passada; Gemini SÓ se faltar algo (sem re-zoom)
+    from ocr.tipos_documento import classificar_arquivo, TipoDocumento
+
+    # CNH: sempre direto para o Gemini Vision (regra do usuário: OCR local não é confiável para CNH)
+    cnhs = [a for a in arquivos if classificar_arquivo(a) == TipoDocumento.CNH]
+    demais = [a for a in arquivos if a not in cnhs]
+
+    resultado_cnh: Dict[str, List[Dict]] = {t.value: [] for t in TipoDocumento}
+    if cnhs and gemini_disponivel():
+        print(f"[OCR] CNH enviada DIRETO para Gemini Vision ({len(cnhs)} doc(s)) - pulando OCR local...")
+        gem_cnh = extrair_varios_gemini(cnhs, tipos_por_nome={c.name: "cnh" for c in cnhs})
+        if gem_cnh:
+            resultado_cnh = gem_cnh
+    elif cnhs:
+        demais.extend(cnhs)
+
+    if not demais:
+        return resultado_cnh
+
+    # Demais documentos (CRLV, TAC, Comprovante): Tesseract 1ª passada; Gemini preenche vazios
     label = "LOCAL" if engine == "local" else "AUTO"
     print(
-        f"[OCR] Motor {label} - Leitura Rápida Local primeiro"
+        f"[OCR] Motor {label} para demais documentos ({len(demais)}) - Leitura Rápida Local primeiro"
         + (
             "; Gemini preenche vazios."
             if gemini_se_vazio_ativo()
@@ -532,24 +588,22 @@ def _rodar_extracao(
     )
     from ocr.parsers_locais import extrair_varios_local
 
-    local = extrair_varios_local(list(arquivos))
-    # 2ª passada local com zoom: sempre se faltar campo ou houver DÚVIDA
-    # (placa H↔B, renavam...). Só pula se local já estiver completo e confiante.
-    import os as _os
-
-    rapido = (_os.getenv("OCR_RAPIDO", "1") or "1").strip().lower() not in (
-        "0", "false", "nao", "não", "no", "off",
-    )
+    local = extrair_varios_local(list(demais))
     faltas_pre = _listar_faltas(local)
     if faltas_pre:
         print(
-            "[OCR] Há campos vazios/ilegíveis na primeira leitura. "
-            "Poupando tempo e repassando a dúvida direto para o Gemini..."
+            "[OCR] Há campos vazios/ilegíveis nos veículos/docs. "
+            "Repassando a dúvida direto para o Gemini..."
         )
-        # Desativado intencionalmente _retry_local_com_zoom para acelerar OCR (1 pass local -> Gemini)
     else:
-        print("[OCR] Local completo e sem dúvidas - sem re-zoom.")
-    return _gemini_completa_vazios(local, list(arquivos))
+        print("[OCR] Local completo e sem dúvidas.")
+    final_outros = _gemini_completa_vazios(local, list(demais))
+
+    # Junta CNH do Gemini com os demais documentos
+    for t_val, lista in resultado_cnh.items():
+        if lista:
+            final_outros.setdefault(t_val, []).extend(lista)
+    return final_outros
 
 
 def _extrair_so_cache(arquivos: List[Path]) -> Dict[str, List[Dict]]:
@@ -1329,13 +1383,25 @@ def _sanitizar_nome_pessoa(s: str) -> str:
     s = (s or "").strip()
     s = s.lstrip("'\"`´‘’“”‚‛ \t")
     s = s.rstrip("'\"`´‘’“”‚‛ \t")
+    # Remove prefixos colados tipo "SIR JAIRO...", "SR JAIRO...", "SR/ JAIRO..."
+    s = re.sub(r"^(?:SIR|SR[\.\/]?)\s+", "", s, flags=re.I).strip()
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
 
 def _sanitizar_cidade(s: str) -> str:
     s = (s or "").strip()
-    s = re.sub(r"^(?:LOCAL|CIDADE|MUNIC[IÍ]PIO)\s+", "", s, flags=re.I).strip()
+    try:
+        from utils.cidades_brasil import limpar_prefixo_cidade
+        s = limpar_prefixo_cidade(s)
+    except Exception:
+        pass
+    s = re.sub(
+        r"^(?:LOCAL|CIDADE|MUNIC[IÍ]PIO|MUNICIPIO|MUNIC|MUN|UF|ÁREA|AREA|REA)\s+",
+        "",
+        s,
+        flags=re.I,
+    ).strip()
     s = re.sub(r"\s+", " ", s).strip()
     try:
         from ocr.parsers_locais import _corrigir_barra_dos_coqueiros
@@ -1778,8 +1844,11 @@ def _mesclar_proprietario_caso(
     if prop.cpf_cnpj and not p.cpf_cnpj:
         p.cpf_cnpj = prop.cpf_cnpj
     # Cidade do CRLV SEMPRE preenche se prop estiver sem (ou se preferir e CRLV tem)
-    if prop.cidade and (not p.cidade or preferir):
+    # — mas só se não for lixo como "MINISTERIO DOS TRANSPORTES"
+    if prop.cidade and not _cidade_extracao_lixo(prop.cidade) and (not p.cidade or preferir):
         p.cidade = prop.cidade
+    elif prop.cidade and _cidade_extracao_lixo(prop.cidade):
+        print(f"[OCR] Cidade lixo ignorada na mesclagem do prop: {prop.cidade!r}")
     if prop.uf and (not p.uf or preferir):
         p.uf = prop.uf
     if prop.rntrc and not p.rntrc:
@@ -1804,7 +1873,7 @@ def _sincronizar_cidades_crlv(dados: DadosCaso) -> None:
             if dados.proprietario is None:
                 dados.proprietario = vp
             else:
-                if vp.cidade and not dados.proprietario.cidade:
+                if vp.cidade and not _cidade_extracao_lixo(vp.cidade) and not dados.proprietario.cidade:
                     dados.proprietario.cidade = vp.cidade
                 if vp.uf and not dados.proprietario.uf:
                     dados.proprietario.uf = vp.uf
@@ -1815,7 +1884,7 @@ def _sincronizar_cidades_crlv(dados: DadosCaso) -> None:
 
     # 2) Cidade no veículo do CRLV -> preenche prop se ainda vazio
     for v in veiculos:
-        if not (v.cidade or "").strip():
+        if not (v.cidade or "").strip() or _cidade_extracao_lixo(v.cidade):
             continue
         # prop embutido no veículo
         if v.proprietario:
@@ -1835,13 +1904,13 @@ def _sincronizar_cidades_crlv(dados: DadosCaso) -> None:
                 dados.proprietario.uf = v.uf
 
     # 3) Prop com cidade -> qualquer slot sem cidade
-    if dados.proprietario and dados.proprietario.cidade:
+    if dados.proprietario and dados.proprietario.cidade and not _cidade_extracao_lixo(dados.proprietario.cidade):
         for v in veiculos:
             if not (v.cidade or "").strip():
                 v.sincronizar_cidade_proprietario(dados.proprietario)
 
     # 4) Alinha prop embutido do veículo com o principal (mesma cidade do CRLV)
-    if dados.proprietario and dados.proprietario.cidade:
+    if dados.proprietario and dados.proprietario.cidade and not _cidade_extracao_lixo(dados.proprietario.cidade):
         for v in veiculos:
             if v.proprietario is None:
                 continue
@@ -1865,6 +1934,24 @@ def _aplicar_generico(dados: DadosCaso, ex: Dict) -> None:
         m.cep = so_digitos(ex["cep"])
     if ex.get("cidade") and not m.cidade:
         m.cidade = ex["cidade"]
+    if ex.get("data_nascimento") and not m.data_nascimento:
+        m.data_nascimento = ex["data_nascimento"]
+    if ex.get("nome_pai") and not m.nome_pai:
+        m.nome_pai = ex["nome_pai"]
+    if ex.get("nome_mae") and not m.nome_mae:
+        m.nome_mae = ex["nome_mae"]
+    if ex.get("rg") and not m.rg:
+        m.rg = so_digitos(ex["rg"])
+    if ex.get("cnh") and not m.cnh:
+        m.cnh = so_digitos(ex["cnh"])
+    if ex.get("categoria_cnh") and not m.categoria_cnh:
+        m.categoria_cnh = ex["categoria_cnh"]
+    if ex.get("validade_cnh") and not m.validade_cnh:
+        m.validade_cnh = ex["validade_cnh"]
+    if ex.get("data_primeira_habilitacao") and not m.data_primeira_habilitacao:
+        m.data_primeira_habilitacao = ex["data_primeira_habilitacao"]
+    if ex.get("data_emissao_cnh") and not m.data_emissao_cnh:
+        m.data_emissao_cnh = ex["data_emissao_cnh"]
 
 
 def _imprimir_resumo(dados: DadosCaso) -> None:
