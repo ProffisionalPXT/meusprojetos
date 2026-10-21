@@ -1,0 +1,61 @@
+========================================
+  CHECKLIST — 1º CASO REAL NO GW
+========================================
+
+ANTES
+-----
+[ ] 1. Pasta do motorista em:
+      Desktop\gw-motorista-bot\input\NOME_DELE\
+      com: CNH, CRLV (1 ou 2), TAC (se tiver)
+
+[ ] 2. No arquivo .env (abra com Bloco de Notas):
+      DRY_RUN=0          ← grava de verdade
+      BROWSER_MODE=headless
+      CONFIRMAR_DADOS=1
+      ARQUIVAR_APOS=1
+      PRINTS=0
+
+[ ] 3. Você tem tempo para acompanhar o terminal
+      (ENTER para confirmar dados, e corrigir se precisar)
+
+DURANTE
+-------
+[ ] 4. Duplo clique: INICIAR_ROBO.bat
+      (ou "Robo GW Motorista" na Área de Trabalho)
+
+[ ] 5. Confira a lista de dados no terminal:
+      - CPF, nome, CNH, placa, prop, etc.
+      - Corrigir: digite o NÚMERO do campo
+      - ENTER = está certo, pode preencher o GW
+
+[ ] 6. Observe no terminal se:
+      [ ] Login OK
+      [ ] CPF: novo OU já existia (abriu existente)
+      [ ] Placa: achou OU cadastrou veículo
+      [ ] Marca: achou OU cadastrou
+      [ ] Proprietário CPF/CNPJ: achou OU cadastrou
+      [ ] Sem alerta de "já cadastrado" inesperado
+
+[ ] 7. No final, se DRY_RUN=0 e OK:
+      pasta some de input\ e vai para
+      output\processados\...
+
+DEPOIS — CONFERIR NO GW (navegador manual)
+------------------------------------------
+[ ] 8. Abra o GW e busque o motorista pelo CPF
+[ ] 9. Confira:
+      [ ] Dados pessoais / documentação
+      [ ] Aba operacional: placa vinculada
+      [ ] Veículo: marca, tipo, cap/tara, prop, cidade
+[ ] 10. Se algo falhou: anote a mensagem do terminal
+       e a pasta ainda estará em input\ (se não arquivou)
+
+VOLTAR PARA TESTE (seguro)
+--------------------------
+No .env deixe de novo:
+  DRY_RUN=1
+
+========================================
+  Se der erro: NÃO force Salvar de novo
+  com o mesmo CPF até entender a mensagem.
+========================================

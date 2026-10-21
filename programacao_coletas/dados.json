@@ -1,0 +1,48 @@
+{
+  "data": "15.10.26 (QUINTA)",
+  "coletas": [
+    {
+      "motorista": "ROMILSON",
+      "tipo": "REMESSA",
+      "cliente": "JDE CAFÉ 476 PALLETES",
+      "horario": "17 AS 21:00"
+    },
+    {
+      "motorista": "VALDEMIR",
+      "tipo": "1-COLETA",
+      "cliente": "ASSAI SALETE 100 PALLETES",
+      "horario": "08 AS 15:00"
+    },
+    {
+      "motorista": "VALDEMIR",
+      "tipo": "2-COLETA",
+      "cliente": "ATACADAO CENTRO-SULL CD 100 PALLETES",
+      "horario": "08:00"
+    },
+    {
+      "motorista": "FABIO",
+      "tipo": "",
+      "cliente": "NAZARIA FEIRA DE SANTANA 200 PALLETES",
+      "horario": "14 AS 16:00"
+    },
+    {
+      "motorista": "JONES",
+      "tipo": "",
+      "cliente": "CABRAL E SOUSA 400 PALLETES",
+      "horario": "08 AS 11:00"
+    },
+    {
+      "motorista": "GABRIEL",
+      "tipo": "",
+      "cliente": "ATAKAREJO SIMOES FILHO CD 272 PALLETES",
+      "horario": "07:00"
+    },
+    {
+      "motorista": "ARGEMIRO",
+      "tipo": "",
+      "cliente": "ASSAI SERRINHA 268 PALLETES",
+      "horario": "08:00"
+    }
+  ],
+  "obs": "FAVOR CUMPRIR OS HORÁRIOS SUPRACITADOS EM CADA ORDEM DE COLETA, ASSIM EVITAREMOS DESGASTES DESNECESSÁRIOS. ASSIM COMO AO CHEGAREM, NOS CLIENTES, QUE FOREM IMPEDIDOS DE ACOMPANHAR O CARREGAMENTO DO CAMINHÃO, AVISA DE IMEDIATO NO GRUPO DE NOTAS."
+}

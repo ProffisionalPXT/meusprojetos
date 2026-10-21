@@ -1,12 +1,26 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# Ambiente e credenciais
 .env
+.env.*
+*.env
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Documentos, dados e execuções reais
+input/
+output/
+logs/
+dados/
+scratch/
+dados_manuais.json
 *.log
-*.png
-*.jpg
-*.jpeg
+*.txt.bak
+output_time*.txt
+_ocr_*.txt
+fake.jpg
 logs.json
 last_check.json
 last_check_time.json
@@ -19,6 +33,16 @@ preview_*.png
 temp_*.txt
 uploads/
 screenshots/
-input/
-dados/
 .DS_Store
+
+# Playwright & Browser
+playwright/
+.playwright/
+
+# Ambientes virtuais e IDEs
+.venv/
+venv/
+ENV/
+.vscode/
+.idea/
+.agents/
